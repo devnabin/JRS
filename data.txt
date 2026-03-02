@@ -1,0 +1,165 @@
+Terms in DveOps Ci/CD
+Continuous Integration (CI) Continuous Delivery (CD) Infrastructure as Code (IaC) Configuration Management Cloud Computing Containers (Docker, Kubernetes) Agile Methodology DevOps Culture and Practices Git and Version Control Monitoring and Logging Automation Tools (Jenkins, Ansible, Chef, Puppet)
+
+Employer
+we are looking for a very energetic and technology passionate individual for the post of DevOps / CD CI developer in our company, one needs to have good understanding of core programming concepts and must have work in a required field for around or more than 6 years of work experience. Candidate from Kathmandu area will be higly preferable. He/she must be familair with core concept of Web Development including HTML, CSS and JavaScript (JS). He/She should be above 21 years old and must posses above 60 percentages in related field like CSIT or BIT etc. He/She must have knowledge in Web development, testing, deployment, debugging, maintanance of a software. Some of the point should be possessed by a developer Continuous Integration (CI) Continuous Delivery (CD) Infrastructure as Code (IaC) Configuration Management Cloud Computing Containers (Docker, Kubernetes) Agile Methodology DevOps Culture and Practices Git and Version Control Monitoring and Logging Automation Tools (Jenkins, Ansible, Chef, Puppet).
+
+Job seeker
+Salan Bhattarai Kathmandu. I have done bachelor degree in CSIT Program. I have 6 years of work experience as Cloud Computing and CI CD developer in many local company, I have good understanding of core programming and and i can code more effeciently. I have good knowledge in Git, Git bash command line. I can automate code using python as a screpting language. i am familair with all the core concet of web development include HTML, Css and JS. I am familair with team collaboration. I can test write, test, debuge, Implement, and deploy the code. I am very much familair with CI / CD concept and infrastructure as code (IaC). Some of the other field that I am good at Docker, Kubernetes Agile Methodology DevOps Culture and Practices Git and Version Control Monitoring and Logging Automation Tools Jenkins, Ansible, Chef, Puppet
+
+-----------------------------------------------------------------------
+
+Terms in  Front End developer
+CSS Cascading Style Sheets (CSS) Box Model Responsive Design Media Queries Flexbox Grid Layout CSS Preprocessors (e.g., SASS, LESS) CSS Frameworks (e.g., Bootstrap, Materialize) HTML HyperText Markup Language (HTML) Semantic HTML Document Object Model (DOM) Accessibility Forms and Input Semantic Web Web Standards Browser Compatibility JavaScript JavaScript (JS) Variables Functions Control Flow Arrays Objects Scope Callbacks Asynchronous Programming Libraries  and Frameworks (e.g., jQuery, Node.js, Angular.js) React.js React.js Virtual DOM JSX Components State Props Lifecycle methods Hooks Redux React Router
+
+Employer
+we are looking for a very energetic and technology passionate individual for the post of frontend developer in our company, one needs to have good understanding of core programming concepts and must have work in a required field for around or more than 6 years of work experience. Candidate from Kathmandu area will be higly preferable. He/she must be familair with core concept of HTML, CSS and JavaScript (JS). He/She should be above 21 years old and must posses above 60 percentages in related field like CSIT or BIT etc. He/She must have knowledge in CSS Cascading Style Sheets (CSS) Box Model Responsive Design Media Queries Flexbox Grid React.js Virtual DOM JSX Components State Props Lifecycle methods and deeply understanding in javaScript like  Variables Functions Control Flow Arrays Objects.
+
+
+Job seeker
+I am familiaer with CSS Cascading Style Sheets (CSS) Box Model Responsive 
+Design Media Queries Flexbox Grid Layout CSS Preprocessors (e.g., SASS, LESS)
+ CSS Frameworks (e.g., Bootstrap, Materialize) i have strong knowledge
+  in front end  development and i know all the tags of html HTML HyperText 
+  Markup Language (HTML) Semantic HTML Document Object Model (DOM) 
+  Accessibility Forms and Input Semantic Web Web Standards Browser 
+  Compatibility JavaScript JavaScript (JS) Variables Functions Control Flow Arrays Objects Scope Callbacks Asynchronous Programming Libraries and Frameworks (e.g., jQuery, Node.js, Angular.js) React.js React.js Virtual DOM JSX Components State Props Lifecycle methods Hooks Redux React Router
+
+
+
+-----------------------------------------------------------------------
+‍‍‍‍‍‍‍‍
+
+$unwantedWords = array(
+    "a",
+    "about",
+    "above",
+    "after",
+    "again",
+    "against",
+    "all",
+    "am",
+    "an",
+    "and",
+    "any",
+    "are",
+    "as",
+    "at",
+    "be",
+    "because",
+    "been",
+    "before",
+    "being",
+    "below",
+    "between",
+    "both",
+    "but",
+    "by",
+    "can",
+    "cannot",
+    "could",
+    "did",
+    "do",
+    "does",
+    "doing",
+    "down",
+    "during",
+    "each",
+    "few",
+    "for",
+    "from",
+    "further",
+    "had",
+    "has",
+    "have",
+    "having",
+    "he",
+    "her",
+    "here",
+    "hers",
+    "herself",
+    "him",
+    "himself",
+    "his",
+    "how",
+    "i",
+    "if",
+    "in",
+    "into",
+    "is",
+    "it",
+    "its",
+    "itself",
+    "me",
+    "more",
+    "most",
+    "my",
+    "myself",
+    "no",
+    "nor",
+    "not",
+    "of",
+    "off",
+    "on",
+    "once",
+    "only",
+    "or",
+    "other",
+    "ought",
+    "our",
+    "ours",
+    "ourselves",
+    "out",
+    "over",
+    "own",
+    "same",
+    "she",
+    "should",
+    "so",
+    "some",
+    "such",
+    "than",
+    "that",
+    "the",
+    "their",
+    "theirs",
+    "them",
+    "themselves",
+    "then",
+    "there",
+    "these",
+    "they",
+    "this",
+    "those",
+    "through",
+    "to",
+    "too",
+    "under",
+    "until",
+    "up",
+    "very",
+    "was",
+    "we",
+    "were",
+    "what",
+    "when",
+    "where",
+    "which",
+    "while",
+    "who",
+    "whom",
+    "why",
+    "with",
+    "would",
+    "you",
+    "your",
+    "yours",
+    "yourself",
+    "yourselves"
+);
+
+
+
+
+
+I have done bachelor degree in CSIT Program. I have 6 years of work experience as backend developer and CI CD developer in many local company, I have good understanding of core programming in javaScript and nodejs and and i can code more effeciently. I have good knowledge in Git, Git bash command line. I can automate code javaScript as a screpting language. i am familair with all the core concet of web development include HTML, Css and JS. I am familair with team collaboration. I can test write, test, debuge, Implement, and deploy the code. I am very much familair with CI / CD concept and infrastructure as code (IaC). Some of the other field that I am good at Docker, Kubernetes Practices Git and Version Control Monitoring and Logging Automation Tools
