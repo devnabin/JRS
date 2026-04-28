@@ -84,10 +84,7 @@ include('similarity.php')
         echo "</br>", "</br>","</br>", "</br>";
         echo "Cosine value is : </br> ";
         echo $sim_percent;
-
         ?>
-
-
       </main>
     </div>
   </div>
@@ -98,8 +95,6 @@ include('similarity.php')
   </script>
   <script src="../../assets/js/vendor/popper.min.js"></script>
   <script src="../../dist/js/bootstrap.min.js"></script>
-
-  <!-- Icons -->
   <script src="https://unpkg.com/feather-icons/dist/feather.min.js"></script>
   <script>
     feather.replace();

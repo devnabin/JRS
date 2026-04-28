@@ -160,7 +160,6 @@ include('similarity.php')
           $array_text2 = explode(" ", $text2);
 
 
-
           // print_r($array_text1);
           // echo ("**************");
           // print_r($array_text2);
@@ -197,8 +196,6 @@ include('similarity.php')
             // echo "check a and b data";
             // print_r(Similarity::checkb($array_text2, $dot));
             echo '<br>';
-
-
 
             $sql3 = "select * from job_master where JobId='" . $JobId . "'";
             $result3 = mysqli_query($conn, $sql3);
