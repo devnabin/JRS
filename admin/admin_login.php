@@ -172,7 +172,7 @@ if (isset($_POST['submit'])) {
         <a href="../index.php" class="back-link">← Return to Home</a>
     </div>
 
-    <p class="text-center text-muted footer-text mt-4 mb-0">&copy; 2023-2024 JRS</p>
+    <p class="text-center text-muted footer-text mt-4 mb-0">&copy; 2026 JRS</p>
 </div>
 
 </body>
