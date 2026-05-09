@@ -5,20 +5,15 @@ if (isset($_SESSION['uname'])) {
   header('location:registration.php');
 }
 ?>
+
 <?php include 'connection/db.php' ?>
+
 <?php
 if (!function_exists("GetSQLValueString")) {
   function GetSQLValueString($theValue, $theType, $theDefinedValue = "", $theNotDefinedValue = "")
   {
-
-    // chat gpt
     $theValue = stripslashes($theValue);
 
-    // our old code
-    // $theValue = get_magic_quotes_gpc() ? stripslashes($theValue) : $theValue;
-
-    //  $theValue = function_exists("mysql_real_escape_string") ? mysqli_real_escape_string($theValue) : mysqli_escape_string($theValue);
-    //
     switch ($theType) {
       case "text":
         $theValue = ($theValue != "") ? "'" . $theValue . "'" : "NULL";
@@ -43,27 +38,20 @@ if (!function_exists("GetSQLValueString")) {
 
 $currentPage = $_SERVER["PHP_SELF"];
 
-
-
-
-
 $query_Recordset1 = "SELECT MinQualification FROM job_master";
 $Recordset1 = mysqli_query($conn, $query_Recordset1) or die(mysqli_error());
 $row_Recordset1 = mysqli_fetch_assoc($Recordset1);
 $totalRows_Recordset1 = mysqli_num_rows($Recordset1);
-
 
 $query_Recordset3 = "SELECT job_master.JobId, job_master.CompanyName, job_master.JobTitle, application_master.Status, application_master.JobSeekId, application_master.Description FROM application_master, job_master WHERE application_master.JobId=job_master.JobId";
 $Recordset3 = mysqli_query($conn, $query_Recordset3) or die(mysqli_error());
 $row_Recordset3 = mysqli_fetch_assoc($Recordset3);
 $totalRows_Recordset3 = mysqli_num_rows($Recordset3);
 
-
 $query_Recordset4 = "SELECT distinct CompanyName FROM job_master";
 $Recordset4 = mysqli_query($conn, $query_Recordset4) or die(mysqli_error());
 $row_Recordset4 = mysqli_fetch_assoc($Recordset4);
 $totalRows_Recordset4 = mysqli_num_rows($Recordset4);
-
 
 $query_Recordset5 = "SELECT distinct JobTitle FROM job_master";
 $Recordset5 = mysqli_query($conn, $query_Recordset5) or die(mysqli_error());
@@ -106,251 +94,557 @@ if (!empty($_SERVER['QUERY_STRING'])) {
 }
 $queryString_Recordset2 = sprintf("&totalRows_Recordset2=%d%s", $totalRows_Recordset2, $queryString_Recordset2);
 ?>
+
 <!doctype html>
 <html lang="en">
 
 <head>
   <meta charset="utf-8">
-  <meta name="viewport" content="width=device-width, initial-scale=1, shrink-to-fit=no">
-  <meta name="description" content="">
-  <meta name="author" content="">
-  <link rel="icon" href="/docs/4.0/assets/img/favicons/favicon.ico">
+  <meta name="viewport" content="width=device-width, initial-scale=1">
+  <title>JobSeeker Search Job</title>
 
-  <title>Employer Dashboard</title>
   <link rel="stylesheet" href="https://maxcdn.bootstrapcdn.com/bootstrap/4.5.2/css/bootstrap.min.css">
-
-  <!-- jQuery library -->
   <script src="https://ajax.googleapis.com/ajax/libs/jquery/3.5.1/jquery.min.js"></script>
-
-  <!-- Popper JS -->
   <script src="https://cdnjs.cloudflare.com/ajax/libs/popper.js/1.16.0/umd/popper.min.js"></script>
-
-  <!-- Latest compiled JavaScript -->
   <script src="https://maxcdn.bootstrapcdn.com/bootstrap/4.5.2/js/bootstrap.min.js"></script>
-
-  <!-- Custom styles for this template -->
   <link href="./css/dashboard.css" rel="stylesheet">
+
+  <style>
+    body {
+      margin: 0;
+      background: #f0fdfa;
+      font-family: "Segoe UI", Arial, sans-serif;
+      color: #134e4a;
+    }
+
+    .navbar {
+      height: 70px;
+      background: #ffffff !important;
+      box-shadow: 0 4px 20px rgba(20, 184, 166, 0.14);
+      padding: 0 !important;
+      z-index: 1000;
+    }
+
+    .navbar-brand {
+      width: 260px;
+      height: 70px;
+      background: linear-gradient(135deg, rgb(20, 184, 166), #0d9488);
+      color: #ffffff !important;
+      display: flex;
+      align-items: center;
+      padding-left: 25px !important;
+      font-size: 21px;
+      font-weight: 800;
+      letter-spacing: 0.5px;
+      margin: 0 !important;
+    }
+
+    .navbar .nav-link {
+      color: rgb(20, 184, 166) !important;
+      border: 1px solid rgb(20, 184, 166);
+      border-radius: 12px;
+      padding: 8px 18px !important;
+      font-weight: 700;
+      margin-right: 20px;
+      transition: 0.25s;
+    }
+
+    .navbar .nav-link:hover {
+      background: rgb(20, 184, 166);
+      color: #ffffff !important;
+    }
+
+    .sidebar {
+      width: 260px;
+      min-height: calc(100vh - 70px);
+      background: #134e4a !important;
+      padding: 25px 15px;
+      position: fixed;
+      left: 0;
+      top: 70px;
+    }
+
+    .sidebar .nav-link {
+      color: #ccfbf1 !important;
+      border-radius: 14px;
+      padding: 13px 15px;
+      margin-bottom: 8px;
+      font-weight: 500;
+      display: flex;
+      align-items: center;
+      gap: 12px;
+      transition: 0.25s;
+    }
+
+    .sidebar .nav-link:hover,
+    .sidebar .nav-link.active {
+      background: linear-gradient(135deg, rgb(20, 184, 166), #0d9488);
+      color: #ffffff !important;
+      transform: translateX(5px);
+      box-shadow: 0 10px 24px rgba(20, 184, 166, 0.28);
+    }
+
+    .sidebar .nav-link svg {
+      width: 19px;
+      height: 19px;
+    }
+
+    main {
+      margin-left: 260px;
+      padding: 35px !important;
+      max-width: calc(100% - 260px);
+    }
+
+    .page-header {
+      background: linear-gradient(135deg, rgb(20, 184, 166), #0d9488);
+      color: white;
+      border-radius: 28px;
+      padding: 35px;
+      margin-bottom: 28px;
+      box-shadow: 0 18px 45px rgba(20, 184, 166, 0.28);
+      border-bottom: none !important;
+    }
+
+    .page-header h1 {
+      font-size: 34px;
+      font-weight: 800;
+      margin-bottom: 8px;
+      text-transform: uppercase;
+    }
+
+    .page-header p {
+      margin: 0;
+      opacity: 0.95;
+      font-size: 16px;
+    }
+
+    .content-card {
+      background: #ffffff;
+      border-radius: 24px;
+      padding: 30px;
+      box-shadow: 0 12px 35px rgba(20, 184, 166, 0.12);
+      border: 1px solid #ccfbf1;
+      margin-bottom: 28px;
+    }
+
+    .section-title {
+      font-size: 22px;
+      font-weight: 800;
+      color: #134e4a;
+      margin-bottom: 22px;
+      display: flex;
+      align-items: center;
+      gap: 10px;
+    }
+
+    .section-title span {
+      width: 12px;
+      height: 32px;
+      background: rgb(20, 184, 166);
+      border-radius: 20px;
+      display: inline-block;
+    }
+
+    .form-group label {
+      font-weight: 700;
+      color: #134e4a;
+      margin-bottom: 8px;
+    }
+
+    select {
+      width: 100%;
+      min-height: 48px;
+      border-radius: 14px;
+      border: 1px solid #ccfbf1;
+      background: #f8fffd;
+      color: #134e4a;
+      font-weight: 500;
+      padding: 8px 14px;
+      outline: none;
+      transition: 0.25s;
+    }
+
+    select:focus {
+      border-color: rgb(20, 184, 166);
+      box-shadow: 0 0 0 4px rgba(20, 184, 166, 0.14);
+      background: #ffffff;
+    }
+
+    input[type="submit"] {
+      background: linear-gradient(135deg, rgb(20, 184, 166), #0d9488);
+      border: none;
+      color: white;
+      border-radius: 14px;
+      padding: 12px 34px;
+      font-weight: 800;
+      box-shadow: 0 12px 25px rgba(20, 184, 166, 0.28);
+      transition: 0.25s;
+      cursor: pointer;
+    }
+
+    input[type="submit"]:hover {
+      transform: translateY(-3px);
+      box-shadow: 0 16px 35px rgba(20, 184, 166, 0.38);
+      color: white;
+    }
+
+    .job-result-card {
+      background: #ffffff;
+      border-radius: 24px;
+      padding: 26px;
+      box-shadow: 0 12px 35px rgba(20, 184, 166, 0.12);
+      border: 1px solid #ccfbf1;
+      margin-bottom: 22px;
+      transition: 0.25s;
+    }
+
+    .job-result-card:hover {
+      transform: translateY(-5px);
+      box-shadow: 0 18px 45px rgba(20, 184, 166, 0.22);
+    }
+
+    .job-result-card table {
+      margin-bottom: 0;
+    }
+
+    .job-result-card td {
+      border: none;
+      border-bottom: 1px solid #e4fbf6;
+      padding: 14px 16px;
+      vertical-align: middle;
+      color: #134e4a;
+    }
+
+    .job-result-card tr:last-child td {
+      border-bottom: none;
+    }
+
+    .job-result-card td:first-child {
+      width: 220px;
+      background: #f0fdfa;
+      font-weight: 800;
+    }
+
+    .apply-btn {
+      background: linear-gradient(135deg, rgb(20, 184, 166), #0d9488);
+      color: #ffffff !important;
+      border-radius: 12px;
+      padding: 10px 18px;
+      text-decoration: none !important;
+      font-weight: 800;
+      display: inline-block;
+      box-shadow: 0 10px 22px rgba(20, 184, 166, 0.25);
+      transition: 0.25s;
+    }
+
+    .apply-btn:hover {
+      transform: translateY(-2px);
+      box-shadow: 0 14px 30px rgba(20, 184, 166, 0.34);
+    }
+
+    .table {
+      margin-bottom: 0;
+    }
+
+    .table thead th {
+      background: #134e4a;
+      color: #ffffff;
+      border: none;
+      padding: 15px;
+      font-weight: 800;
+      vertical-align: middle;
+    }
+
+    .table tbody td {
+      padding: 15px;
+      vertical-align: middle;
+      border-color: #e4fbf6;
+      color: #134e4a;
+      font-weight: 500;
+    }
+
+    .table tbody tr:hover {
+      background: #f0fdfa;
+    }
+
+    .status-badge {
+      background: #ccfbf1;
+      color: #0f766e;
+      padding: 7px 13px;
+      border-radius: 30px;
+      font-weight: 800;
+      font-size: 13px;
+      display: inline-block;
+    }
+
+    .records-box {
+      background: #ccfbf1;
+      border-radius: 14px;
+      padding: 14px 18px;
+      font-weight: 800;
+      color: #134e4a;
+      margin-top: 15px;
+    }
+
+    @media (max-width: 768px) {
+      .navbar {
+        height: auto;
+        flex-direction: column;
+        align-items: stretch;
+      }
+
+      .navbar-brand {
+        width: 100%;
+      }
+
+      .navbar .nav-link {
+        margin: 12px;
+        text-align: center;
+      }
+
+      .sidebar {
+        position: static;
+        width: 100%;
+        min-height: auto;
+      }
+
+      main {
+        margin-left: 0;
+        max-width: 100%;
+        padding: 20px !important;
+      }
+
+      .page-header h1 {
+        font-size: 26px;
+      }
+
+      .content-card {
+        padding: 22px;
+      }
+
+      .job-result-card td:first-child {
+        width: 140px;
+      }
+    }
+  </style>
 </head>
 
 <body>
-  <nav class="navbar navbar-dark sticky-top bg-dark flex-md-nowrap p-0">
-    <a class="navbar-brand col-sm-3 col-md-2 mr-0" href="#">JobSeeker Page</a>
-    <ul class="navbar-nav px-3">
-      <li class="nav-item text-nowrap">
-        <a class="nav-link" href="logout.php">Sign out</a>
-      </li>
-    </ul>
-  </nav>
 
-  <div class="container-fluid">
-    <div class="row">
-      <nav class="col-md-2 d-none d-md-block bg-light sidebar">
-        <div class="sidebar-sticky">
-          <ul class="nav flex-column">
-            <li class="nav-item">
-              <a class="nav-link active" href="index.php">
-                <span data-feather="home"></span>
-                Dashboard <span class="sr-only">(current)</span>
-              </a>
-            </li>
-            <li class="nav-item">
-              <a class="nav-link" href="profile.php">
-                <span data-feather="users"></span>
-                Profile
-              </a>
-            </li>
-            <li class="nav-item">
-              <a class="nav-link" href="education.php">
-                <span data-feather="layers"></span>
-                Education
-              </a>
-            </li>
-            <li class="nav-item">
-              <a class="nav-link" href="searchjob.php">
-                <span data-feather="search"></span>
-                Search Job
-              </a>
-            </li>
-            <li class="nav-item">
-              <a class="nav-link" href="relevant.php">
-                <span data-feather="search"></span>
-                Relevant Job
-              </a>
-            </li>
-            <!-- <h6 class="sidebar-heading d-flex justify-content-between align-items-center px-3 mt-4 mb-1 text-muted">
-              <span>Saved reports</span>
-              <a class="d-flex align-items-center text-muted" href="#">
-                <span data-feather="plus-circle"></span>
-              </a>
-            </h6> -->
-            <ul class="nav flex-column mb-2">
-              <li class="nav-item">
-                <a class="nav-link" href="walking.php">
-                  <span data-feather="file-text"></span>
-                  Walking Interview
-                </a>
-              </li>
-              <li class="nav-item">
-                <a class="nav-link" href="feedback.php">
-                  <span data-feather="message-circle"></span>
-                  Feedback
-                </a>
-              </li>
-            </ul>
-        </div>
-      </nav>
+<nav class="navbar navbar-dark sticky-top bg-dark flex-md-nowrap p-0">
+  <a class="navbar-brand col-sm-3 col-md-2 mr-0" href="#">JobSeeker Page</a>
+  <ul class="navbar-nav px-3">
+    <li class="nav-item text-nowrap">
+      <a class="nav-link" href="logout.php">Sign out</a>
+    </li>
+  </ul>
+</nav>
 
-      <main role="main" class="col-md-9 ml-sm-auto col-lg-10 pt-3 px-4">
-        <div class="d-flex justify-content-between flex-wrap flex-md-nowrap align-items-center pb-2 mb-3 border-bottom">
-          <h1 class="h2" style="text-transform:uppercase;">Search Your Jobs</h1>
-        </div>
+<div class="container-fluid">
+  <div class="row">
+    <nav class="col-md-2 d-none d-md-block bg-light sidebar">
+      <div class="sidebar-sticky">
+        <ul class="nav flex-column">
+          <li class="nav-item">
+            <a class="nav-link" href="index.php">
+              <span data-feather="home"></span>
+              Dashboard <span class="sr-only">(current)</span>
+            </a>
+          </li>
+
+          <li class="nav-item">
+            <a class="nav-link" href="profile.php">
+              <span data-feather="user"></span>
+              Profile
+            </a>
+          </li>
+
+          <li class="nav-item">
+            <a class="nav-link" href="education.php">
+              <span data-feather="layers"></span>
+              Education
+            </a>
+          </li>
+
+          <li class="nav-item">
+            <a class="nav-link active" href="searchjob.php">
+              <span data-feather="search"></span>
+              Search Job
+            </a>
+          </li>
+
+          <li class="nav-item">
+            <a class="nav-link" href="relevant.php">
+              <span data-feather="target"></span>
+              Relevant Job
+            </a>
+          </li>
+
+          <li class="nav-item">
+            <a class="nav-link" href="walking.php">
+              <span data-feather="file-text"></span>
+              Walking Interview
+            </a>
+          </li>
+
+          <li class="nav-item">
+            <a class="nav-link" href="feedback.php">
+              <span data-feather="message-circle"></span>
+              Feedback
+            </a>
+          </li>
+        </ul>
+      </div>
+    </nav>
+
+    <main role="main" class="col-md-9 ml-sm-auto col-lg-10 pt-3 px-4">
+
+      <div class="page-header">
+        <h1>Search Your Jobs</h1>
+        <p>Filter jobs by qualification, company, and area of work.</p>
+      </div>
+
+      <div class="content-card">
+        <h3 class="section-title"><span></span>Search Job</h3>
+
         <form id="form1" method="post" action="searchjob.php">
-          <table width="100%" border="0" cellspacing="0" cellpadding="0">
-            <tr>
-              <td><strong>Select Qualification:</strong></td>
-              <td><label>
-                  <select name="cmbQual" id="cmbQual">
-                    <?php
-                    do {
-                    ?>
-                      <option value="<?php echo $row_Recordset1['MinQualification'] ?>"><?php echo $row_Recordset1['MinQualification'] ?></option>
-                    <?php
-                    } while ($row_Recordset1 = mysqli_fetch_assoc($Recordset1));
-                    $rows = mysqli_num_rows($Recordset1);
-                    if ($rows > 0) {
-                      mysqli_data_seek($Recordset1, 0);
-                      $row_Recordset1 = mysqli_fetch_assoc($Recordset1);
-                    }
-                    ?>
-                  </select>
-                </label></td>
-              <td><label></label></td>
-            </tr>
-            <tr>
-              <td><strong>Select Compnay Name:</strong></td>
-              <td><label>
-                  <select name="cmbCompany" id="cmbCompany">
-                    <?php
-                    do {
-                    ?>
-                      <option value="<?php echo $row_Recordset4['CompanyName'] ?>"><?php echo $row_Recordset4['CompanyName'] ?></option>
-                    <?php
-                    } while ($row_Recordset4 = mysqli_fetch_assoc($Recordset4));
-                    $rows = mysqli_num_rows($Recordset4);
-                    if ($rows > 0) {
-                      mysqli_data_seek($Recordset4, 0);
-                      $row_Recordset4 = mysqli_fetch_assoc($Recordset4);
-                    }
-                    ?>
-                  </select>
-                </label></td>
-              <td>&nbsp;</td>
-            </tr>
-            <tr>
-              <td><strong>Select Area of Work:</strong></td>
-              <td><label>
-                  <select name="cmbArea" id="cmbArea">
-                    <?php
-                    do {
-                    ?>
-                      <option value="<?php echo $row_Recordset5['JobTitle'] ?>"><?php echo $row_Recordset5['JobTitle'] ?></option>
-                    <?php
-                    } while ($row_Recordset5 = mysqli_fetch_assoc($Recordset5));
-                    $rows = mysqli_num_rows($Recordset5);
-                    if ($rows > 0) {
-                      mysqli_data_seek($Recordset5, 0);
-                      $row_Recordset5 = mysqli_fetch_assoc($Recordset5);
-                    }
-                    ?>
-                  </select>
-                </label></td>
-              <td>&nbsp;</td>
-            </tr>
-            <tr>
-              <td>&nbsp;</td>
-              <td><input type="submit" name="button" id="button" value="Search" /></td>
-              <td>&nbsp;</td>
-            </tr>
-          </table>
-        </form>
-        <table width="100%" border="1px" cellspacing="0" cellpadding="0">
-          <tr>
-            <td width="100%">&nbsp;
-
-              <?php
-              if ($totalRows_Recordset2 != 0) {
-                do { ?>
-                  <table width="100%" border="1px" cellpadding="0" cellspacing="0">
-                    <tr>
-                      <td><strong>JobId</strong></td>
-                      <td><strong><?php echo $row_Recordset2['JobId']; ?></strong></td>
-                    </tr>
-                    <tr>
-                      <td><strong>CompanyName</strong></td>
-                      <td><strong><?php echo $row_Recordset2['CompanyName']; ?></strong></td>
-                    </tr>
-                    <tr>
-                      <td><strong>JobTitle</strong></td>
-                      <td><strong><?php echo $row_Recordset2['JobTitle']; ?></strong></td>
-                    </tr>
-                    <tr>
-                      <td><strong>Vacancy</strong></td>
-                      <td><strong><?php echo $row_Recordset2['Vacancy']; ?></strong></td>
-                    </tr>
-                    <tr>
-                      <td><strong>MinQualification</strong></td>
-                      <td><strong><?php echo $row_Recordset2['MinQualification']; ?></strong></td>
-                    </tr>
-                    <tr>
-                      <td><strong>Description</strong></td>
-                      <td><strong><?php echo $row_Recordset2['Description']; ?></strong></td>
-
-                    <tr>
-                      <td>&nbsp;</td>
-                      <td><a href="Apply.php?JobId=<?php echo $row_Recordset2['JobId']; ?>"><strong>Apply For Job</strong></a></td>
-                    </tr>
-                  </table>
-                <?php } while ($row_Recordset2 = mysqli_fetch_assoc($Recordset2));
-
+          <div class="row">
+            <div class="form-group col-md-4">
+              <label for="cmbQual">Select Qualification</label>
+              <select name="cmbQual" id="cmbQual">
+                <?php
+                do {
                 ?>
-        </table>
+                  <option value="<?php echo $row_Recordset1['MinQualification'] ?>"><?php echo $row_Recordset1['MinQualification'] ?></option>
+                <?php
+                } while ($row_Recordset1 = mysqli_fetch_assoc($Recordset1));
+                $rows = mysqli_num_rows($Recordset1);
+                if ($rows > 0) {
+                  mysqli_data_seek($Recordset1, 0);
+                  $row_Recordset1 = mysqli_fetch_assoc($Recordset1);
+                }
+                ?>
+              </select>
+            </div>
+
+            <div class="form-group col-md-4">
+              <label for="cmbCompany">Select Company Name</label>
+              <select name="cmbCompany" id="cmbCompany">
+                <?php
+                do {
+                ?>
+                  <option value="<?php echo $row_Recordset4['CompanyName'] ?>"><?php echo $row_Recordset4['CompanyName'] ?></option>
+                <?php
+                } while ($row_Recordset4 = mysqli_fetch_assoc($Recordset4));
+                $rows = mysqli_num_rows($Recordset4);
+                if ($rows > 0) {
+                  mysqli_data_seek($Recordset4, 0);
+                  $row_Recordset4 = mysqli_fetch_assoc($Recordset4);
+                }
+                ?>
+              </select>
+            </div>
+
+            <div class="form-group col-md-4">
+              <label for="cmbArea">Select Area of Work</label>
+              <select name="cmbArea" id="cmbArea">
+                <?php
+                do {
+                ?>
+                  <option value="<?php echo $row_Recordset5['JobTitle'] ?>"><?php echo $row_Recordset5['JobTitle'] ?></option>
+                <?php
+                } while ($row_Recordset5 = mysqli_fetch_assoc($Recordset5));
+                $rows = mysqli_num_rows($Recordset5);
+                if ($rows > 0) {
+                  mysqli_data_seek($Recordset5, 0);
+                  $row_Recordset5 = mysqli_fetch_assoc($Recordset5);
+                }
+                ?>
+              </select>
+            </div>
+          </div>
+
+          <div class="text-center mt-3">
+            <input type="submit" name="button" id="button" value="Search">
+          </div>
+        </form>
+      </div>
+
       <?php
-              }
-      ?></td>
-      </tr>
-      </table>
-      <table width="100%" border="0" cellspacing="0" cellpadding="0">
-        <tr>
-          <td bgcolor="#006699" style="color:#fff"><strong>Status of Job</strong></td>
-        </tr>
-        <tr>
-          <td>
-            <table width="100%" border="1" cellpadding="1" cellspacing="2" bordercolor="#006699">
-              <tr style="color:#fff">
-                <th height="32" bgcolor="#006699" class="style3">
-                  <div align="left" class="style9 style5 style2"><strong>Company Name</strong></div>
-                </th>
-                <th bgcolor="#006699" class="style3">
-                  <div align="left" class="style9 style5 style2"><strong>Job Title</strong></div>
-                </th>
-                <th bgcolor="#006699" class="style3">
-                  <div align="left" class="style9 style5 style2"><strong>Status</strong></div>
-                </th>
-                <th bgcolor="#006699" class="style3">
-                  <div align="left" class="style9 style5 style2"><strong>Description</strong></div>
-                </th>
+      if ($totalRows_Recordset2 != 0) {
+        do {
+      ?>
+          <div class="job-result-card">
+            <table class="table">
+              <tr>
+                <td><strong>Job ID</strong></td>
+                <td><strong><?php echo $row_Recordset2['JobId']; ?></strong></td>
               </tr>
+
+              <tr>
+                <td><strong>Company Name</strong></td>
+                <td><strong><?php echo $row_Recordset2['CompanyName']; ?></strong></td>
+              </tr>
+
+              <tr>
+                <td><strong>Job Title</strong></td>
+                <td><strong><?php echo $row_Recordset2['JobTitle']; ?></strong></td>
+              </tr>
+
+              <tr>
+                <td><strong>Vacancy</strong></td>
+                <td><strong><?php echo $row_Recordset2['Vacancy']; ?></strong></td>
+              </tr>
+
+              <tr>
+                <td><strong>Minimum Qualification</strong></td>
+                <td><strong><?php echo $row_Recordset2['MinQualification']; ?></strong></td>
+              </tr>
+
+              <tr>
+                <td><strong>Description</strong></td>
+                <td><strong><?php echo $row_Recordset2['Description']; ?></strong></td>
+              </tr>
+
+              <tr>
+                <td></td>
+                <td>
+                  <a href="Apply.php?JobId=<?php echo $row_Recordset2['JobId']; ?>" class="apply-btn">
+                    Apply For Job
+                  </a>
+                </td>
+              </tr>
+            </table>
+          </div>
+      <?php
+        } while ($row_Recordset2 = mysqli_fetch_assoc($Recordset2));
+      }
+      ?>
+
+      <div class="content-card">
+        <h3 class="section-title"><span></span>Status of Job</h3>
+
+        <div class="table-responsive">
+          <table class="table table-striped align-middle">
+            <thead>
+              <tr>
+                <th>Company Name</th>
+                <th>Job Title</th>
+                <th>Status</th>
+                <th>Description</th>
+              </tr>
+            </thead>
+
+            <tbody>
               <?php
-              // Establish Connection with Database
               include 'connection/db.php';
 
-              // Specify the query to execute
               $sql = "SELECT job_master.JobId, job_master.CompanyName, job_master.JobTitle, application_master.Status, application_master.JobSeekId, application_master.Description
 FROM application_master, job_master
 WHERE application_master.JobId=job_master.JobId and application_master.JobSeekId='" . $_SESSION['userid'] . "'";
-              // Execute query
+
               $result = mysqli_query($conn, $sql);
-              // Loop through each records 
+
               while ($row = mysqli_fetch_array($result)) {
                 $CompanyName = $row['CompanyName'];
                 $JobTitle = $row['JobTitle'];
@@ -358,52 +652,40 @@ WHERE application_master.JobId=job_master.JobId and application_master.JobSeekId
                 $Description = $row['Description'];
               ?>
                 <tr>
-                  <td class="style3">
-                    <div align="left" class="style9 style5"><strong><?php echo $CompanyName; ?></strong></div>
-                  </td>
-                  <td class="style3">
-                    <div align="left" class="style9 style5"><strong><?php echo $JobTitle; ?></strong></div>
-                  </td>
-                  <td class="style3">
-                    <div align="left" class="style9 style5"><strong><?php echo $Status; ?></strong></div>
-                  </td>
-                  <td class="style3">
-                    <div align="left" class="style9 style5"><strong><?php echo $Description; ?></strong></div>
-                  </td>
+                  <td><strong><?php echo $CompanyName; ?></strong></td>
+                  <td><?php echo $JobTitle; ?></td>
+                  <td><span class="status-badge"><?php echo $Status; ?></span></td>
+                  <td><?php echo $Description; ?></td>
                 </tr>
               <?php
               }
-              // Retrieve Number of records returned
+
               $records = mysqli_num_rows($result);
-              ?>
-              <?php
-              // Close the connection
               mysqli_close($conn);
               ?>
-            </table>
-          </td>
-        </tr>
-      </table>
+            </tbody>
+          </table>
+        </div>
 
-      </main>
-    </div>
+        <div class="records-box">
+          Total <?php echo $records; ?> Records
+        </div>
+      </div>
+
+    </main>
   </div>
+</div>
 
-  <!-- Bootstrap core JavaScript
-    ================================================== -->
-  <!-- Placed at the end of the document so the pages load faster -->
-  <script src="https://code.jquery.com/jquery-3.2.1.slim.min.js" integrity="sha384-KJ3o2DKtIkvYIK3UENzmM7KCkRr/rE9/Qpg6aAZGJwFDMVNA/GpGFF93hXpG5KkN" crossorigin="anonymous"></script>
-  <script>
-    window.jQuery || document.write('<script src="../../assets/js/vendor/jquery-slim.min.js"><\/script>');
-  </script>
-  <script src="../../assets/js/vendor/popper.min.js"></script>
-  <script src="../../dist/js/bootstrap.min.js"></script>
-
-  <!-- Icons -->
-  <script src="https://unpkg.com/feather-icons/dist/feather.min.js"></script>
-  <script>
-    feather.replace();
-  </script>
+<script src="https://code.jquery.com/jquery-3.2.1.slim.min.js" integrity="sha384-KJ3o2DKtIkvYIK3UENzmM7KCkN" crossorigin="anonymous"></script>
+<script>
+  window.jQuery || document.write('<script src="../../assets/js/vendor/jquery-slim.min.js"><\/script>');
+</script>
+<script src="../../assets/js/vendor/popper.min.js"></script>
+<script src="../../dist/js/bootstrap.min.js"></script>
+<script src="https://unpkg.com/feather-icons/dist/feather.min.js"></script>
+<script>
+  feather.replace();
+</script>
 
 </body>
 
