@@ -4,129 +4,246 @@ if (!isset($_SESSION['email'])) {
   header('location:admin_login.php');
 }
 ?>
+
 <!doctype html>
 <html lang="en">
-
 <head>
   <meta charset="utf-8">
-  <meta name="viewport" content="width=device-width, initial-scale=1, shrink-to-fit=no">
-  <meta name="description" content="">
-  <meta name="author" content="">
-  <link rel="icon" href="/docs/4.0/assets/img/favicons/favicon.ico">
+  <meta name="viewport" content="width=device-width, initial-scale=1">
+  <title>JRS Admin Dashboard</title>
 
-  <title>Admin Dashboard</title>
-  <link rel="stylesheet" href="https://maxcdn.bootstrapcdn.com/bootstrap/4.5.2/css/bootstrap.min.css">
+  <link href="https://cdn.jsdelivr.net/npm/bootstrap@5.3.3/dist/css/bootstrap.min.css" rel="stylesheet">
+  <script src="https://unpkg.com/feather-icons"></script>
 
-  <!-- jQuery library -->
-  <script src="https://ajax.googleapis.com/ajax/libs/jquery/3.5.1/jquery.min.js"></script>
+  <style>
+    body {
+      margin: 0;
+      background: #f4f7fb;
+      font-family: "Segoe UI", Arial, sans-serif;
+      color: #1f2937;
+    }
 
-  <!-- Popper JS -->
-  <script src="https://cdnjs.cloudflare.com/ajax/libs/popper.js/1.16.0/umd/popper.min.js"></script>
+    .topbar {
+      height: 70px;
+      background: #ffffff;
+      box-shadow: 0 4px 20px rgba(0,0,0,0.06);
+      position: sticky;
+      top: 0;
+      z-index: 1000;
+    }
 
-  <!-- Latest compiled JavaScript -->
-  <script src="https://maxcdn.bootstrapcdn.com/bootstrap/4.5.2/js/bootstrap.min.js"></script>
+    .brand-box {
+      width: 260px;
+      background: linear-gradient(135deg, #0d6efd, #6610f2);
+      color: white;
+      height: 70px;
+      display: flex;
+      align-items: center;
+      padding-left: 25px;
+      font-size: 22px;
+      font-weight: 800;
+      letter-spacing: 1px;
+    }
 
-  <!-- Custom styles for this template -->
-  <link href="./css/dashboard.css" rel="stylesheet">
+    .logout-btn {
+      border-radius: 12px;
+      font-weight: 600;
+    }
+
+    .sidebar {
+      width: 260px;
+      min-height: calc(100vh - 70px);
+      background: #111827;
+      padding: 25px 15px;
+      position: fixed;
+      left: 0;
+      top: 70px;
+    }
+
+    .sidebar .nav-link {
+      color: #cbd5e1;
+      border-radius: 14px;
+      padding: 13px 15px;
+      margin-bottom: 8px;
+      font-weight: 500;
+      display: flex;
+      align-items: center;
+      gap: 12px;
+      transition: 0.25s;
+    }
+
+    .sidebar .nav-link:hover,
+    .sidebar .nav-link.active {
+      background: linear-gradient(135deg, #0d6efd, #6610f2);
+      color: #fff;
+      transform: translateX(5px);
+    }
+
+    .main-content {
+      margin-left: 260px;
+      padding: 35px;
+    }
+
+    .welcome-card {
+      background: linear-gradient(135deg, #0d6efd, #6610f2);
+      color: white;
+      border-radius: 25px;
+      padding: 35px;
+      box-shadow: 0 18px 45px rgba(13,110,253,0.25);
+    }
+
+    .info-card {
+      background: white;
+      border-radius: 22px;
+      padding: 25px;
+      box-shadow: 0 12px 35px rgba(0,0,0,0.07);
+      transition: 0.25s;
+      height: 100%;
+    }
+
+    .info-card:hover {
+      transform: translateY(-5px);
+    }
+
+    .icon-circle {
+      width: 48px;
+      height: 48px;
+      border-radius: 14px;
+      background: #eef4ff;
+      color: #0d6efd;
+      display: flex;
+      align-items: center;
+      justify-content: center;
+      margin-bottom: 15px;
+    }
+
+    @media (max-width: 768px) {
+      .brand-box {
+        width: 100%;
+      }
+
+      .sidebar {
+        position: static;
+        width: 100%;
+        min-height: auto;
+      }
+
+      .main-content {
+        margin-left: 0;
+        padding: 20px;
+      }
+    }
+  </style>
 </head>
 
 <body>
-  <nav class="navbar navbar-dark sticky-top bg-dark flex-md-nowrap p-0">
-    <a class="navbar-brand col-sm-3 col-md-2 mr-0" href="#">ADMIN PAGE</a>
-    <ul class="navbar-nav px-3">
-      <li class="nav-item text-nowrap">
-        <a class="nav-link" href="logout.php">Sign out</a>
+
+  <div class="topbar d-flex justify-content-between align-items-center">
+    <div class="brand-box">JRS ADMIN</div>
+
+    <div class="me-4">
+      <a href="logout.php" class="btn btn-outline-danger logout-btn">
+        Sign out
+      </a>
+    </div>
+  </div>
+
+  <nav class="sidebar">
+    <ul class="nav flex-column">
+      <li class="nav-item">
+        <a class="nav-link active" href="#">
+          <i data-feather="home"></i> Dashboard
+        </a>
+      </li>
+
+      <li class="nav-item">
+        <a class="nav-link" href="employer.php">
+          <i data-feather="briefcase"></i> Employers
+        </a>
+      </li>
+
+      <li class="nav-item">
+        <a class="nav-link" href="jobseeker.php">
+          <i data-feather="users"></i> Job Seeker
+        </a>
+      </li>
+
+      <li class="nav-item">
+        <a class="nav-link" href="managejobseeker.php">
+          <i data-feather="user-check"></i> Manage Job Seeker
+        </a>
+      </li>
+
+      <li class="nav-item">
+        <a class="nav-link" href="manageemployer.php">
+          <i data-feather="user-plus"></i> Manage Employer
+        </a>
+      </li>
+
+      <li class="nav-item">
+        <a class="nav-link" href="feedback.php">
+          <i data-feather="message-square"></i> Feedback
+        </a>
+      </li>
+
+      <li class="nav-item">
+        <a class="nav-link" href="admin_news.php">
+          <i data-feather="file-plus"></i> Publish News
+        </a>
       </li>
     </ul>
   </nav>
 
-  <div class="container-fluid">
-    <div class="row">
-      <nav class="col-md-2 d-none d-md-block bg-light sidebar">
-        <div class="sidebar-sticky">
-          <ul class="nav flex-column">
-            <li class="nav-item">
-              <a class="nav-link active" href="#">
-                <span data-feather="home"></span>
-                Dashboard <span class="sr-only">(current)</span>
-              </a>
-            </li>
-            <li class="nav-item">
-              <a class="nav-link" href="employer.php">
-                <span data-feather="users"></span>
-                Employers
-              </a>
-            </li>
-            <li class="nav-item">
-              <a class="nav-link" href="jobseeker.php">
-                <span data-feather="users"></span>
-                Job Seeker
-              </a>
-            </li>
-            <li class="nav-item">
-              <a class="nav-link" href="managejobseeker.php">
-                <span data-feather="users"></span>
-                Manage Job Seeker
-              </a>
-            </li>
-            <li class="nav-item">
-              <a class="nav-link" href="manageemployer.php">
-                <span data-feather="users"></span>
-                Manage Employer
-              </a>
-            </li>
+  <main class="main-content">
+    <div class="welcome-card mb-4">
+      <h1 class="fw-bold mb-2">Welcome Admin</h1>
+      <p class="mb-0">
+        Manage users, employers, job seekers, feedback, and news from your JRS admin dashboard.
+      </p>
+    </div>
 
-            <ul class="nav flex-column mb-2">
-              <li class="nav-item">
-                <a class="nav-link" href="feedback.php">
-                  <span data-feather="file-text"></span>
-                  FEEDBACK
-                </a>
-              </li>
-              <li class="nav-item">
-                <a class="nav-link" href="admin_news.php">
-                  <span data-feather="file-plus"></span>
-                  PUBLISH NEWS
-                </a>
-              </li>
-            </ul>
-        </div>
-      </nav>
-
-      <main role="main" class="col-md-9 ml-sm-auto col-lg-10 pt-3 px-4">
-        <div class="d-flex justify-content-between flex-wrap flex-md-nowrap align-items-center pb-2 mb-3 border-bottom">
-          <h1 class="h2">WELCOME ADMIN</h1>
-        </div>
-
-        <div class="container">
-          <!-- <h1>Welcome to Admin</h1> -->
-          <p>This page provides you access to all the necessary tools to manage and control your website effectively. With these tools, you can monitor your website's performance, manage your content, and much more.</p>
-          <p>
-            You can access different tools on side bar. You can manage 
+    <div class="row g-4">
+      <div class="col-md-4">
+        <div class="info-card">
+          <div class="icon-circle">
+            <i data-feather="users"></i>
+          </div>
+          <h5 class="fw-bold">Manage Users</h5>
+          <p class="text-muted mb-0">
+            View and manage job seekers and employers registered in the system.
           </p>
         </div>
-        <!-- <img src="img/job.jpeg" alt="job"> -->
+      </div>
 
-      </main>
+      <div class="col-md-4">
+        <div class="info-card">
+          <div class="icon-circle">
+            <i data-feather="message-circle"></i>
+          </div>
+          <h5 class="fw-bold">Review Feedback</h5>
+          <p class="text-muted mb-0">
+            Check feedback submitted by users and improve the platform experience.
+          </p>
+        </div>
+      </div>
+
+      <div class="col-md-4">
+        <div class="info-card">
+          <div class="icon-circle">
+            <i data-feather="edit-3"></i>
+          </div>
+          <h5 class="fw-bold">Publish News</h5>
+          <p class="text-muted mb-0">
+            Add and publish important updates or announcements for users.
+          </p>
+        </div>
+      </div>
     </div>
-  </div>
+  </main>
 
-  <!-- Bootstrap core JavaScript
-    ================================================== -->
-  <!-- Placed at the end of the document so the pages load faster -->
-  <script src="https://code.jquery.com/jquery-3.2.1.slim.min.js" integrity="sha384-KJ3o2DKtIkvYIK3UENzmM7KCkRr/rE9/Qpg6aAZGJwFDMVNA/GpGFF93hXpG5KkN" crossorigin="anonymous"></script>
-  <script>
-    window.jQuery || document.write('<script src="../../assets/js/vendor/jquery-slim.min.js"><\/script>');
-  </script>
-  <script src="../../assets/js/vendor/popper.min.js"></script>
-  <script src="../../dist/js/bootstrap.min.js"></script>
-
-  <!-- Icons -->
-  <script src="https://unpkg.com/feather-icons/dist/feather.min.js"></script>
   <script>
     feather.replace();
   </script>
 
 </body>
-
 </html>

@@ -4,204 +4,277 @@ if (!isset($_SESSION['email'])) {
   header('location:admin_login.php');
 }
 ?>
+
 <!doctype html>
 <html lang="en">
-
 <head>
   <meta charset="utf-8">
-  <meta name="viewport" content="width=device-width, initial-scale=1, shrink-to-fit=no">
-  <meta name="description" content="">
-  <meta name="author" content="">
-  <link rel="icon" href="/docs/4.0/assets/img/favicons/favicon.ico">
+  <meta name="viewport" content="width=device-width, initial-scale=1">
+  <title>JRS Admin | Verify Account</title>
 
-  <title>Admin Dashboard</title>
-  <link rel="stylesheet" href="https://maxcdn.bootstrapcdn.com/bootstrap/4.5.2/css/bootstrap.min.css">
+  <link href="https://cdn.jsdelivr.net/npm/bootstrap@5.3.3/dist/css/bootstrap.min.css" rel="stylesheet">
+  <script src="https://unpkg.com/feather-icons"></script>
 
-  <!-- jQuery library -->
-  <script src="https://ajax.googleapis.com/ajax/libs/jquery/3.5.1/jquery.min.js"></script>
+  <style>
+    body {
+      margin: 0;
+      background: #f4f7fb;
+      font-family: "Segoe UI", Arial, sans-serif;
+      color: #1f2937;
+    }
 
-  <!-- Popper JS -->
-  <script src="https://cdnjs.cloudflare.com/ajax/libs/popper.js/1.16.0/umd/popper.min.js"></script>
+    .topbar {
+      height: 70px;
+      background: #fff;
+      box-shadow: 0 4px 20px rgba(0,0,0,0.06);
+      position: sticky;
+      top: 0;
+      z-index: 1000;
+    }
 
-  <!-- Latest compiled JavaScript -->
-  <script src="https://maxcdn.bootstrapcdn.com/bootstrap/4.5.2/js/bootstrap.min.js"></script>
+    .brand-box {
+      width: 260px;
+      height: 70px;
+      background: linear-gradient(135deg, #0d6efd, #6610f2);
+      color: #fff;
+      display: flex;
+      align-items: center;
+      padding-left: 25px;
+      font-size: 22px;
+      font-weight: 800;
+      letter-spacing: 1px;
+    }
 
-  <!-- Custom styles for this template -->
-  <link href="./css/dashboard.css" rel="stylesheet">
+    .logout-btn {
+      border-radius: 12px;
+      font-weight: 600;
+    }
+
+    .sidebar {
+      width: 260px;
+      min-height: calc(100vh - 70px);
+      background: #111827;
+      padding: 25px 15px;
+      position: fixed;
+      left: 0;
+      top: 70px;
+    }
+
+    .sidebar .nav-link {
+      color: #cbd5e1;
+      border-radius: 14px;
+      padding: 13px 15px;
+      margin-bottom: 8px;
+      font-weight: 500;
+      display: flex;
+      align-items: center;
+      gap: 12px;
+      transition: 0.25s;
+    }
+
+    .sidebar .nav-link:hover,
+    .sidebar .nav-link.active {
+      background: linear-gradient(135deg, #0d6efd, #6610f2);
+      color: #fff;
+      transform: translateX(5px);
+    }
+
+    .main-content {
+      margin-left: 260px;
+      padding: 35px;
+    }
+
+    .page-header {
+      background: linear-gradient(135deg, #0d6efd, #6610f2);
+      color: white;
+      border-radius: 25px;
+      padding: 30px;
+      box-shadow: 0 18px 45px rgba(13,110,253,0.25);
+      margin-bottom: 25px;
+    }
+
+    .content-card {
+      background: #fff;
+      border-radius: 22px;
+      padding: 25px;
+      box-shadow: 0 12px 35px rgba(0,0,0,0.07);
+    }
+
+    .table thead th {
+      background: #111827;
+      color: white;
+      border: none;
+      padding: 14px;
+    }
+
+    .table tbody td {
+      padding: 14px;
+      vertical-align: middle;
+    }
+
+    .detail-btn {
+      background: #e0ecff;
+      color: #0d6efd;
+      padding: 7px 14px;
+      border-radius: 10px;
+      text-decoration: none;
+      font-weight: 700;
+      font-size: 13px;
+    }
+
+    .detail-btn:hover {
+      background: #0d6efd;
+      color: white;
+    }
+
+    .records-box {
+      background: #f8fafc;
+      border-radius: 14px;
+      padding: 14px;
+      font-weight: 700;
+      color: #374151;
+      margin-top: 15px;
+    }
+
+    @media (max-width: 768px) {
+      .brand-box {
+        width: 100%;
+      }
+
+      .sidebar {
+        position: static;
+        width: 100%;
+        min-height: auto;
+      }
+
+      .main-content {
+        margin-left: 0;
+        padding: 20px;
+      }
+    }
+  </style>
 </head>
 
 <body>
-  <nav class="navbar navbar-dark sticky-top bg-dark flex-md-nowrap p-0">
-    <a class="navbar-brand col-sm-3 col-md-2 mr-0" href="#">ADMIN PAGE</a>
-    <ul class="navbar-nav px-3">
-      <li class="nav-item text-nowrap">
-        <a class="nav-link" href="logout.php">Sign out</a>
-      </li>
-    </ul>
-  </nav>
 
-  <div class="container-fluid">
-    <div class="row">
-      <nav class="col-md-2 d-none d-md-block bg-light sidebar">
-        <div class="sidebar-sticky">
-          <ul class="nav flex-column">
-            <li class="nav-item">
-              <a class="nav-link active" href="#">
-                <span data-feather="home"></span>
-                Dashboard <span class="sr-only">(current)</span>
-              </a>
-            </li>
-            <li class="nav-item">
-              <a class="nav-link" href="employer.php">
-                <span data-feather="users"></span>
-                Employers
-              </a>
-            </li>
-            <li class="nav-item">
-              <a class="nav-link" href="jobseeker.php">
-                <span data-feather="users"></span>
-                Job Seeker
-              </a>
-            </li>
-            <li class="nav-item">
-              <a class="nav-link" href="managejobseeker.php">
-                <span data-feather="users"></span>
-                Manage Job Seeker
-              </a>
-            </li>
-            <li class="nav-item">
-              <a class="nav-link" href="manageemployer.php">
-                <span data-feather="users"></span>
-                Manage Employer
-              </a>
-            </li>
-            <ul class="nav flex-column mb-2">
-              <li class="nav-item">
-                <a class="nav-link" href="feedback.php">
-                  <span data-feather="file-text"></span>
-                  FEEDBACK
-                </a>
-              </li>
-              <li class="nav-item">
-                <a class="nav-link" href="admin_news.php">
-                  <span data-feather="file-plus"></span>
-                  PUBLISH NEWS
-                </a>
-              </li>
-            </ul>
-        </div>
-      </nav>
+<div class="topbar d-flex justify-content-between align-items-center">
+  <div class="brand-box">JRS ADMIN</div>
 
-      <main role="main" class="col-md-9 ml-sm-auto col-lg-10 pt-3 px-4">
-        <div class="d-flex justify-content-between flex-wrap flex-md-nowrap align-items-center pb-2 mb-3 border-bottom">
-          <h1 class="h2">Verify Account</h1>
-        </div>
-        <table width="100%" border="0" cellspacing="0" cellpadding="0">
+  <div class="me-4">
+    <a href="logout.php" class="btn btn-outline-danger logout-btn">Sign out</a>
+  </div>
+</div>
+
+<nav class="sidebar">
+  <ul class="nav flex-column">
+    <li class="nav-item">
+      <a class="nav-link" href="admin_dashboard.php">
+        <i data-feather="home"></i> Dashboard
+      </a>
+    </li>
+
+    <li class="nav-item">
+      <a class="nav-link" href="employer.php">
+        <i data-feather="briefcase"></i> Employers
+      </a>
+    </li>
+
+    <li class="nav-item">
+      <a class="nav-link" href="jobseeker.php">
+        <i data-feather="users"></i> Job Seeker
+      </a>
+    </li>
+
+    <li class="nav-item">
+      <a class="nav-link active" href="managejobseeker.php">
+        <i data-feather="user-check"></i> Manage Job Seeker
+      </a>
+    </li>
+
+    <li class="nav-item">
+      <a class="nav-link" href="manageemployer.php">
+        <i data-feather="user-plus"></i> Manage Employer
+      </a>
+    </li>
+
+    <li class="nav-item">
+      <a class="nav-link" href="feedback.php">
+        <i data-feather="message-square"></i> Feedback
+      </a>
+    </li>
+
+    <li class="nav-item">
+      <a class="nav-link" href="admin_news.php">
+        <i data-feather="file-plus"></i> Publish News
+      </a>
+    </li>
+  </ul>
+</nav>
+
+<main class="main-content">
+
+  <div class="page-header">
+    <h1 class="fw-bold mb-2">Verify Account</h1>
+    <p class="mb-0">Review pending job seeker accounts and open details for verification.</p>
+  </div>
+
+  <div class="content-card">
+    <div class="table-responsive">
+      <table class="table table-striped align-middle">
+        <thead>
           <tr>
-            <td>&nbsp;</td>
+            <th>Id</th>
+            <th>Job Seeker Name</th>
+            <th>City</th>
+            <th>Gender</th>
+            <th>Detail</th>
           </tr>
-          <tr>
-            <td>
-              <table width="100%" border="1" bordercolor="black">
-                <tr style="color:#fff">
-                  <th height="32" bgcolor="black">
-                    <div align="left"><strong>Id</strong></div>
-                  </th>
-                  <th bgcolor="black">
-                    <div align="left"><strong>JobSeeker Name</strong></div>
-                  </th>
-                  <th bgcolor="black">
-                    <div align="left"><strong>City</strong></div>
-                  </th>
-                  <th bgcolor="black">
-                    <div align="left">Gender</div>
-                  </th>
-                  <th bgcolor="black">
-                    <div align="left"><strong>Detail</strong></div>
-                  </th>
-                </tr>
-                <?php
-                // Establish Connection with Database
-                include 'connection/db.php';
-                // Specify the query to execute
-                $sql = "select * from JobSeeker_Reg where Status='Pending'";
-                // Execute query
-                $result = mysqli_query($conn, $sql);
-                // Loop through each records
-                while ($row = mysqli_fetch_array($result)) {
-                  $Id = $row['JobSeekId'];
-                  $Name = $row['JobSeekerName'];
-                  $City = $row['City'];
-                  $Gender = $row['Gender'];
+        </thead>
 
-                ?>
-                  <tr>
-                    <td class="style3">
-                      <div align="left" class="style9 style5">
-                        <strong><?php echo $Id; ?></strong>
-                      </div>
-                    </td>
-                    <td class="style3">
-                      <div align="left" class="style9 style5">
-                        <strong><?php echo $Name; ?></strong>
-                      </div>
-                    </td>
-                    <td class="style3">
-                      <div align="left" class="style9 style5">
-                        <strong><?php echo $City; ?></strong>
-                      </div>
-                    </td>
-                    <td class="style3">
-                      <div align="left" class="style9 style5">
-                        <strong><?php echo $Gender; ?></strong>
-                      </div>
-                    </td>
-                    <td class="style3">
-                      <div align="left" class="style9 style5"><strong><a href="DetailJob.php?JobId=<?php echo $Id; ?>">Detail</a></strong>
-                      </div>
-                    </td>
+        <tbody>
+          <?php
+          include 'connection/db.php';
 
-                  </tr>
-                <?php
-                }
-                // Retrieve Number of records returned
-                $records = mysqli_num_rows($result);
-                ?>
-                <tr>
-                  <td colspan="4" class="style3">
-                    <div align="left" class="style12"><?php echo "Total " . $records . " Records"; ?> </div>
-                  </td>
-                </tr>
-                <?php
-                // Close the connection
-                mysqli_close($conn);
-                ?>
-              </table>
-            </td>
-          </tr>
-        </table>
-      </main>
+          $sql = "select * from JobSeeker_Reg where Status='Pending'";
+          $result = mysqli_query($conn, $sql);
 
+          while ($row = mysqli_fetch_array($result)) {
+            $Id = $row['JobSeekId'];
+            $Name = $row['JobSeekerName'];
+            $City = $row['City'];
+            $Gender = $row['Gender'];
+          ?>
+            <tr>
+              <td><strong><?php echo $Id; ?></strong></td>
+              <td><strong><?php echo $Name; ?></strong></td>
+              <td><?php echo $City; ?></td>
+              <td><?php echo $Gender; ?></td>
+              <td>
+                <a class="detail-btn" href="DetailJob.php?JobId=<?php echo $Id; ?>">
+                  View Detail
+                </a>
+              </td>
+            </tr>
+          <?php
+          }
 
+          $records = mysqli_num_rows($result);
+          mysqli_close($conn);
+          ?>
+        </tbody>
+      </table>
+    </div>
+
+    <div class="records-box">
+      Total <?php echo $records; ?> Records
     </div>
   </div>
 
-  <!-- Bootstrap core JavaScript
-    ================================================== -->
-  <!-- Placed at the end of the document so the pages load faster -->
-  <script src="https://code.jquery.com/jquery-3.2.1.slim.min.js" integrity="sha384-KJ3o2DKtIkvYIK3UENzmM7KCkRr/rE9/Qpg6aAZGJwFDMVNA/GpGFF93hXpG5KkN" crossorigin="anonymous"></script>
-  <script>
-    window.jQuery || document.write('<script src="../../assets/js/vendor/jquery-slim.min.js"><\/script>');
-  </script>
-  <script src="../../assets/js/vendor/popper.min.js"></script>
-  <script src="../../dist/js/bootstrap.min.js"></script>
+</main>
 
-  <!-- Icons -->
-  <script src="https://unpkg.com/feather-icons/dist/feather.min.js"></script>
-  <script>
-    feather.replace();
-  </script>
+<script>
+  feather.replace();
+</script>
 
 </body>
-
 </html>
