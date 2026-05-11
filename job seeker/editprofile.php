@@ -11,7 +11,7 @@ if (!isset($_SESSION['uname'])) {
 <head>
   <meta charset="utf-8">
   <meta name="viewport" content="width=device-width, initial-scale=1">
-  <title>JobSeeker Profile</title>
+  <title>Edit JobSeeker Profile</title>
 
   <link rel="stylesheet" href="https://maxcdn.bootstrapcdn.com/bootstrap/4.5.2/css/bootstrap.min.css">
   <script src="https://ajax.googleapis.com/ajax/libs/jquery/3.5.1/jquery.min.js"></script>
@@ -94,11 +94,6 @@ if (!isset($_SESSION['uname'])) {
       box-shadow: 0 10px 24px rgba(20, 184, 166, 0.28);
     }
 
-    .sidebar .nav-link svg {
-      width: 19px;
-      height: 19px;
-    }
-
     main {
       margin-left: 260px;
       padding: 35px !important;
@@ -112,7 +107,6 @@ if (!isset($_SESSION['uname'])) {
       padding: 35px;
       margin-bottom: 28px;
       box-shadow: 0 18px 45px rgba(20, 184, 166, 0.28);
-      border-bottom: none !important;
     }
 
     .page-header h1 {
@@ -128,7 +122,7 @@ if (!isset($_SESSION['uname'])) {
       font-size: 16px;
     }
 
-    .profile-card {
+    .form-card {
       background: #ffffff;
       border-radius: 24px;
       padding: 30px;
@@ -136,84 +130,59 @@ if (!isset($_SESSION['uname'])) {
       border: 1px solid #ccfbf1;
     }
 
-    .profile-top {
-      display: flex;
-      align-items: center;
-      gap: 18px;
-      margin-bottom: 24px;
-      padding-bottom: 22px;
-      border-bottom: 1px solid #ccfbf1;
-    }
-
-    .profile-avatar {
-      width: 74px;
-      height: 74px;
-      border-radius: 22px;
-      background: linear-gradient(135deg, rgb(20, 184, 166), #0d9488);
-      color: white;
-      display: flex;
-      align-items: center;
-      justify-content: center;
-      font-size: 31px;
-      font-weight: 800;
-      box-shadow: 0 12px 28px rgba(20, 184, 166, 0.26);
-    }
-
-    .profile-top h4 {
-      margin: 0;
-      font-weight: 800;
+    .form-group label {
+      font-weight: 700;
       color: #134e4a;
+      margin-bottom: 8px;
     }
 
-    .profile-top span {
-      color: #0f766e;
-      font-weight: 600;
-    }
-
-    .table {
-      margin-bottom: 0;
-    }
-
-    .table td {
-      border: none;
-      border-bottom: 1px solid #e4fbf6;
-      padding: 16px 18px;
+    .form-control {
+      min-height: 48px;
+      border-radius: 14px;
+      border: 1px solid #ccfbf1;
+      background: #f8fffd;
       color: #134e4a;
-      vertical-align: middle;
       font-weight: 500;
-    }
-
-    .table tr:last-child td {
-      border-bottom: none;
-    }
-
-    .table td:first-child {
-      width: 230px;
-      background: #f0fdfa;
-      font-weight: 800;
-      color: #134e4a;
-    }
-
-    .about-box {
-      line-height: 1.7;
-      text-align: justify;
-    }
-
-    .resume-btn {
-      background: #ccfbf1;
-      color: #0f766e !important;
-      border-radius: 12px;
-      padding: 9px 16px;
-      text-decoration: none !important;
-      font-weight: 800;
-      display: inline-block;
       transition: 0.25s;
     }
 
-    .resume-btn:hover {
-      background: rgb(20, 184, 166);
-      color: #ffffff !important;
-      transform: translateY(-2px);
+    .form-control:focus {
+      border-color: rgb(20, 184, 166);
+      box-shadow: 0 0 0 4px rgba(20, 184, 166, 0.14);
+      background: #ffffff;
+    }
+
+    textarea.form-control {
+      min-height: 130px;
+      resize: vertical;
+    }
+
+    .update-btn {
+      background: linear-gradient(135deg, rgb(20, 184, 166), #0d9488);
+      border: none;
+      color: white;
+      border-radius: 14px;
+      padding: 12px 34px;
+      font-weight: 800;
+      box-shadow: 0 12px 25px rgba(20, 184, 166, 0.28);
+      transition: 0.25s;
+    }
+
+    .update-btn:hover {
+      transform: translateY(-3px);
+      box-shadow: 0 16px 35px rgba(20, 184, 166, 0.38);
+      color: white;
+    }
+
+    .back-btn {
+      background: #ccfbf1;
+      color: #0f766e !important;
+      border-radius: 14px;
+      padding: 12px 24px;
+      font-weight: 800;
+      text-decoration: none !important;
+      display: inline-block;
+      margin-right: 10px;
     }
 
     @media (max-width: 768px) {
@@ -248,17 +217,8 @@ if (!isset($_SESSION['uname'])) {
         font-size: 26px;
       }
 
-      .profile-card {
+      .form-card {
         padding: 22px;
-      }
-
-      .profile-top {
-        flex-direction: column;
-        text-align: center;
-      }
-
-      .table td:first-child {
-        width: 150px;
       }
     }
   </style>
@@ -283,7 +243,7 @@ if (!isset($_SESSION['uname'])) {
           <li class="nav-item">
             <a class="nav-link" href="index.php">
               <span data-feather="home"></span>
-              Dashboard <span class="sr-only">(current)</span>
+              Dashboard
             </a>
           </li>
 
@@ -335,113 +295,96 @@ if (!isset($_SESSION['uname'])) {
     <main role="main" class="col-md-9 ml-sm-auto col-lg-10 pt-3 px-4">
 
       <div class="page-header">
-        <h1>Your Details</h1>
-        <p>View your personal profile, resume, and generated profile summary.</p>
+        <h1>Edit Profile</h1>
+        <p>Update your job seeker profile information.</p>
       </div>
 
       <?php
       $ID = $_SESSION['userid'];
       include 'connection/db.php';
 
-      $sql = "select * from jobSeeker_reg where JobSeekId='" . $ID . "'  ";
+      $sql = "select * from jobSeeker_reg where JobSeekId='" . $ID . "'";
       $result = mysqli_query($conn, $sql);
       $row = mysqli_fetch_array($result);
       ?>
 
-      <div class="profile-card">
-        <div class="profile-top">
-          <div class="profile-avatar">
-            <?php echo strtoupper(substr($row['JobSeekerName'], 0, 1)); ?>
+      <form method="post" action="UpdateProfile.php" enctype="multipart/form-data" class="form-card">
+        <input type="hidden" name="txtId" value="<?php echo $row['JobSeekId']; ?>">
+        <input type="hidden" name="oldResume" value="<?php echo $row['Resume']; ?>">
+
+        <div class="row">
+          <div class="form-group col-md-6">
+            <label for="txtName">Name</label>
+            <input type="text" name="txtName" id="txtName" class="form-control" value="<?php echo $row['JobSeekerName']; ?>" required>
           </div>
-          <div>
-            <h4><?php echo $row['JobSeekerName']; ?></h4>
-            <span><?php echo $row['Email']; ?></span>
+
+          <div class="form-group col-md-6">
+            <label for="txtEmail">Email</label>
+            <input type="email" name="txtEmail" id="txtEmail" class="form-control" value="<?php echo $row['Email']; ?>" required>
+          </div>
+
+          <div class="form-group col-md-6">
+            <label for="txtMobile">Mobile</label>
+            <input type="text" name="txtMobile" id="txtMobile" class="form-control" value="<?php echo $row['Mobile']; ?>" required>
+          </div>
+
+          <div class="form-group col-md-6">
+            <label for="txtCity">City</label>
+            <input type="text" name="txtCity" id="txtCity" class="form-control" value="<?php echo $row['City']; ?>" required>
+          </div>
+
+          <div class="form-group col-md-12">
+            <label for="txtAddress">Address</label>
+            <input type="text" name="txtAddress" id="txtAddress" class="form-control" value="<?php echo $row['Address']; ?>" required>
+          </div>
+
+          <div class="form-group col-md-6">
+            <label for="txtQual">Qualification</label>
+            <input type="text" name="txtQual" id="txtQual" class="form-control" value="<?php echo $row['Qualification']; ?>" required>
+          </div>
+
+          <div class="form-group col-md-6">
+            <label for="txtGender">Gender</label>
+            <input type="text" name="txtGender" id="txtGender" class="form-control" value="<?php echo $row['Gender']; ?>" required>
+          </div>
+
+          <div class="form-group col-md-6">
+            <label for="txtAge">Age</label>
+            <input type="text" name="txtAge" id="txtAge" class="form-control" value="<?php echo $row['age']; ?>" required>
+          </div>
+
+          <div class="form-group col-md-6">
+            <label for="txtBirthDate">Birth Date</label>
+            <input type="date" name="txtBirthDate" id="txtBirthDate" class="form-control" value="<?php echo $row['BirthDate']; ?>">
+          </div>
+
+          <div class="form-group col-md-12">
+            <label for="txtExperience">Skills / Experience</label>
+            <textarea name="txtExperience" id="txtExperience" class="form-control" required><?php echo $row['Experience']; ?></textarea>
+          </div>
+
+          <div class="form-group col-md-6">
+            <label for="txtUserName">Username</label>
+            <input type="text" name="txtUserName" id="txtUserName" class="form-control" value="<?php echo $row['UserName']; ?>" required>
+          </div>
+
+          <div class="form-group col-md-6">
+            <label for="txtPassword">Password</label>
+            <input type="password" name="txtPassword" id="txtPassword" class="form-control" value="<?php echo $row['Password']; ?>" required>
+          </div>
+
+          <div class="form-group col-md-12">
+            <label for="txtFile">Upload New Resume</label>
+            <input type="file" name="txtFile" id="txtFile" class="form-control">
+            <small>Current Resume: <?php echo $row['Resume']; ?></small>
           </div>
         </div>
 
-        <div class="table-responsive">
-          <table class="table table-bordered">
-            <tbody>
-              <tr>
-                <td><strong>Name</strong></td>
-                <td><?php echo $row['JobSeekerName']; ?></td>
-              </tr>
-
-              <tr>
-                <td><strong>Address</strong></td>
-                <td><?php echo $row['Address']; ?></td>
-              </tr>
-
-              <tr>
-                <td><strong>City</strong></td>
-                <td><?php echo $row['City']; ?></td>
-              </tr>
-
-              <tr>
-                <td><strong>Email</strong></td>
-                <td><?php echo $row['Email']; ?></td>
-              </tr>
-
-              <tr>
-                <td><strong>Mobile</strong></td>
-                <td><?php echo $row['Mobile']; ?></td>
-              </tr>
-
-              <tr>
-                <td><strong>Qualification</strong></td>
-                <td><?php echo $row['Qualification']; ?></td>
-              </tr>
-
-              <tr>
-                <td><strong>Gender</strong></td>
-                <td><?php echo $row['Gender']; ?></td>
-              </tr>
-
-              <tr>
-                <td><strong>Birth Date</strong></td>
-                <td><?php echo $row['BirthDate']; ?></td>
-              </tr>
-
-              <tr>
-                <td><strong>About Myself</strong></td>
-                <?php
-                $sql1 = "select * from jobseeker_education where JobSeekId='" . $ID . "'  ";
-                $result1 = mysqli_query($conn, $sql1);
-                $row1 = mysqli_fetch_array($result1);
-
-                $about_myself = $row['JobSeekerName'] . " " . $row['Address'] . " " . $row['City'] . " " . $row['Experience'] . " " . $row['Email'] . " " . $row['Mobile'] . " " . $row['age'] . " years old " . $row['Gender'] . " " . $row['Qualification'] . " " . $row1['Degree'] . " " . $row1['University'] . " " . $row1['Percentage'] . " percentage.";
-
-                $sql2 = "select * from about_myself where jobseek_id='" . $ID . "'  ";
-                $result2 = mysqli_query($conn, $sql2);
-                $num = mysqli_num_rows($result2);
-                if ($num == 0) {
-                  $sql3 = "insert into  about_myself(jobseek_id, about_me) VALUES (
-                       $ID, '$about_myself'
-                       )";
-
-                  mysqli_query($conn, $sql3);
-                }
-                ?>
-                <td class="about-box"><?php echo  $about_myself; ?></td>
-              </tr>
-
-              <tr>
-                <td><strong>Resume</strong></td>
-                <td>
-                  <a href="./upload/<?php echo $row['Resume']; ?>" target="_blank" class="resume-btn">
-                    View Resume
-                  </a>
-                </td>
-              </tr>
-            </tbody>
-          </table>
-<div class="text-right mt-4">
-  <a href="editprofile.php?JobSeekId=<?php echo $row['JobSeekId']; ?>" class="resume-btn">
-    Edit Profile
-  </a>
-</div>
+        <div class="text-center mt-4">
+          <a href="profile.php" class="back-btn">Back</a>
+          <input type="submit" name="button" id="button" value="Update Profile" class="btn update-btn">
         </div>
-      </div>
+      </form>
 
       <?php
       mysqli_close($conn);
@@ -451,17 +394,11 @@ if (!isset($_SESSION['uname'])) {
   </div>
 </div>
 
-<script src="https://code.jquery.com/jquery-3.2.1.slim.min.js" integrity="sha384-KJ3o2DKtIkvYIK3UENzmM7KCkN" crossorigin="anonymous"></script>
-<script>
-  window.jQuery || document.write('<script src="../../assets/js/vendor/jquery-slim.min.js"><\/script>');
-</script>
-<script src="../../assets/js/vendor/popper.min.js"></script>
-<script src="../../dist/js/bootstrap.min.js"></script>
+<script src="https://code.jquery.com/jquery-3.2.1.slim.min.js"></script>
 <script src="https://unpkg.com/feather-icons/dist/feather.min.js"></script>
 <script>
   feather.replace();
 </script>
 
 </body>
-
 </html>
