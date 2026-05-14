@@ -157,17 +157,6 @@ include('similarity.php')
       font-weight: 800;
     }
 
-    .match-score {
-      margin: 18px 24px 0;
-      background: #ccfbf1;
-      color: #0f766e;
-      padding: 10px 16px;
-      border-radius: 14px;
-      font-weight: 800;
-      text-align: center;
-      border: 1px solid #99f6e4;
-    }
-
     .job-card-body {
       padding: 24px;
     }
@@ -218,18 +207,6 @@ include('similarity.php')
     .apply-btn:hover {
       transform: translateY(-3px);
       box-shadow: 0 16px 35px rgba(20, 184, 166, 0.38);
-    }
-
-    .empty-card {
-      background: #ffffff;
-      border-radius: 24px;
-      padding: 30px;
-      border: 1px solid #ccfbf1;
-      box-shadow: 0 12px 35px rgba(20, 184, 166, 0.12);
-      color: #134e4a;
-      font-weight: 700;
-      text-align: center;
-      grid-column: 1 / -1;
     }
 
     @media (max-width: 992px) {
@@ -367,35 +344,28 @@ include('similarity.php')
         $sql2 = "select * from job_master";
         $result2 = mysqli_query($conn, $sql2);
 
-        $recommendedCount = 0;
-
         while ($row2 = mysqli_fetch_array($result2)) {
           $JobId = $row2['JobId'];
           $JobTitle = $row2['JobTitle'];
 
           $text2 = $row2['CompanyName'] . ' ' . $row2['JobTitle'] . ' ' . $row2['Age'] . ' ' . $row2['MinQualification'] . ' ' . $row2['Requirement'] . ' ' . $row2['Description'] . ' ' . $row2['ExpectedSalary'];
 
-          $text3 = $text1 . " " . $text2;
+          $text3 = $text1 . $text2;
 
           $array_text1 = explode(" ", $text1);
           $array_text2 = explode(" ", $text2);
+          $array_text3 = explode(" ", $text3);
 
-          $base = Similarity::dot($array_text2);
+          $base = Similarity::dot($array_text3);
           $similarity = Similarity::cosine($array_text1, $array_text2, $base);
           $sim_percent = $similarity * 100;
-          $match_score = round($sim_percent);
 
           if ($sim_percent >= 50) {
-            $recommendedCount++;
         ?>
 
             <div class="job-card">
               <div class="job-card-header">
                 Job Details
-              </div>
-
-              <div class="match-score">
-                Match Score: <?php echo $match_score; ?>%
               </div>
 
               <div class="job-card-body">
@@ -427,16 +397,24 @@ include('similarity.php')
                     </tr>
 
                     <tr>
-                      <th scope="row">Description / Job Specification</th>
+                      <th scope="row">Description/Job Specification</th>
                       <?php
                       $limited_text = substr($row2['Description'], 0, 500);
                       echo "<td>$limited_text...</td>";
                       ?>
                     </tr>
 
+                    <!-- <tr>
+                      <th scope="row">Job Specification</th>
+                      <?php
+                      $limited_text = substr($row2['Description'], 0, 200);
+                      echo "<td>$limited_text...</td>";
+                      ?>
+                    </tr> -->
+
                     <tr>
                       <td colspan="2" class="text-center">
-                        <a href="Apply.php?JobId=<?php echo $row2['JobId']; ?>" class="apply-btn">
+                        <a href="Apply.php?JobId=<?php echo $row3['JobId']; ?>" class="apply-btn">
                           Apply For Job
                         </a>
                       </td>
@@ -448,14 +426,6 @@ include('similarity.php')
 
         <?php
           }
-        }
-
-        if ($recommendedCount == 0) {
-        ?>
-          <div class="empty-card">
-            No relevant jobs found right now. Please update your profile or check again later.
-          </div>
-        <?php
         }
         ?>
 
