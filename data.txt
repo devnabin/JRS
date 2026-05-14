@@ -1,165 +1,150 @@
-Terms in DveOps Ci/CD
-Continuous Integration (CI) Continuous Delivery (CD) Infrastructure as Code (IaC) Configuration Management Cloud Computing Containers (Docker, Kubernetes) Agile Methodology DevOps Culture and Practices Git and Version Control Monitoring and Logging Automation Tools (Jenkins, Ansible, Chef, Puppet)
+HR BIO: My name is Priya Sharma. I am a motivated and professional Human Resources candidate with a strong interest in HR administration, recruitment, employee relations, onboarding, training coordination, and office management. I have good knowledge of human resource management, job posting, resume screening, interview scheduling, employee records, payroll support, attendance management, leave management, performance management, and HR documentation. I am skilled in communication, staff coordination, department coordination, report writing, data entry, record keeping, Microsoft Word, Microsoft Excel, email communication, and administrative support. I am responsible, detail-oriented, organized, and able to maintain confidentiality while working with employees, staff, students, and management teams. I am interested in working as an HR Assistant or Human Resources Officer where I can support recruitment, employee engagement, policy implementation, conflict resolution, and professional workplace communication.
 
-Employer
-we are looking for a very energetic and technology passionate individual for the post of DevOps / CD CI developer in our company, one needs to have good understanding of core programming concepts and must have work in a required field for around or more than 6 years of work experience. Candidate from Kathmandu area will be higly preferable. He/she must be familair with core concept of Web Development including HTML, CSS and JavaScript (JS). He/She should be above 21 years old and must posses above 60 percentages in related field like CSIT or BIT etc. He/She must have knowledge in Web development, testing, deployment, debugging, maintanance of a software. Some of the point should be possessed by a developer Continuous Integration (CI) Continuous Delivery (CD) Infrastructure as Code (IaC) Configuration Management Cloud Computing Containers (Docker, Kubernetes) Agile Methodology DevOps Culture and Practices Git and Version Control Monitoring and Logging Automation Tools (Jenkins, Ansible, Chef, Puppet).
+1. Web Developer
 
-Job seeker
-Salan Bhattarai Kathmandu. I have done bachelor degree in CSIT Program. I have 6 years of work experience as Cloud Computing and CI CD developer in many local company, I have good understanding of core programming and and i can code more effeciently. I have good knowledge in Git, Git bash command line. I can automate code using python as a screpting language. i am familair with all the core concet of web development include HTML, Css and JS. I am familair with team collaboration. I can test write, test, debuge, Implement, and deploy the code. I am very much familair with CI / CD concept and infrastructure as code (IaC). Some of the other field that I am good at Docker, Kubernetes Agile Methodology DevOps Culture and Practices Git and Version Control Monitoring and Logging Automation Tools Jenkins, Ansible, Chef, Puppet
+Employer Description
 
------------------------------------------------------------------------
+We are looking for a skilled and motivated Web Developer to join our company. The candidate should have good knowledge of web development, frontend development, backend development, database management, website design, testing, debugging, deployment, and software maintenance. The candidate will be responsible for developing responsive websites, maintaining web applications, fixing bugs, improving user interface design, and working with the development team. The ideal candidate should understand HTML, CSS, JavaScript, Bootstrap, PHP, MySQL, Git, version control, API integration, web hosting, and basic security practices.
 
-Terms in  Front End developer
-CSS Cascading Style Sheets (CSS) Box Model Responsive Design Media Queries Flexbox Grid Layout CSS Preprocessors (e.g., SASS, LESS) CSS Frameworks (e.g., Bootstrap, Materialize) HTML HyperText Markup Language (HTML) Semantic HTML Document Object Model (DOM) Accessibility Forms and Input Semantic Web Web Standards Browser Compatibility JavaScript JavaScript (JS) Variables Functions Control Flow Arrays Objects Scope Callbacks Asynchronous Programming Libraries  and Frameworks (e.g., jQuery, Node.js, Angular.js) React.js React.js Virtual DOM JSX Components State Props Lifecycle methods Hooks Redux React Router
+Requirements
 
-Employer
-we are looking for a very energetic and technology passionate individual for the post of frontend developer in our company, one needs to have good understanding of core programming concepts and must have work in a required field for around or more than 6 years of work experience. Candidate from Kathmandu area will be higly preferable. He/she must be familair with core concept of HTML, CSS and JavaScript (JS). He/She should be above 21 years old and must posses above 60 percentages in related field like CSIT or BIT etc. He/She must have knowledge in CSS Cascading Style Sheets (CSS) Box Model Responsive Design Media Queries Flexbox Grid React.js Virtual DOM JSX Components State Props Lifecycle methods and deeply understanding in javaScript like  Variables Functions Control Flow Arrays Objects.
+HTML, CSS, JavaScript, Bootstrap, PHP, MySQL, Web Development, Frontend Development, Backend Development, Responsive Design, Database Management, API Integration, Git, Version Control, Debugging, Testing, Website Deployment, Web Hosting, UI Design, UX Design, Software Maintenance, Problem Solving, Team Collaboration, Communication Skills.
 
+Matching Job Seeker Bio
 
-Job seeker
-I am familiaer with CSS Cascading Style Sheets (CSS) Box Model Responsive 
-Design Media Queries Flexbox Grid Layout CSS Preprocessors (e.g., SASS, LESS)
- CSS Frameworks (e.g., Bootstrap, Materialize) i have strong knowledge
-  in front end  development and i know all the tags of html HTML HyperText 
-  Markup Language (HTML) Semantic HTML Document Object Model (DOM) 
-  Accessibility Forms and Input Semantic Web Web Standards Browser 
-  Compatibility JavaScript JavaScript (JS) Variables Functions Control Flow Arrays Objects Scope Callbacks Asynchronous Programming Libraries and Frameworks (e.g., jQuery, Node.js, Angular.js) React.js React.js Virtual DOM JSX Components State Props Lifecycle methods Hooks Redux React Router
+My name is Ramesh Karki. I am a motivated Web Developer with good knowledge of HTML, CSS, JavaScript, Bootstrap, PHP, MySQL, frontend development, backend development, and responsive web design. I have experience in website development, database management, API integration, Git, version control, debugging, testing, web hosting, and website deployment. I am interested in working as a web developer where I can design user-friendly websites, maintain web applications, solve technical problems, and collaborate with a software development team.
 
+---
+2. Software Developer
 
+Employer Description
 
------------------------------------------------------------------------
-‍‍‍‍‍‍‍‍
+We are looking for a Software Developer who can design, develop, test, and maintain software applications. The candidate should have strong knowledge of programming concepts, object-oriented programming, database systems, software testing, debugging, documentation, and application development. The candidate will work with the technical team to develop reliable software, improve existing systems, write clean code, fix errors, and support deployment. The ideal candidate should be familiar with Java, Python, PHP, JavaScript, MySQL, Git, API development, software design, data structures, algorithms, and problem-solving.
 
-$unwantedWords = array(
-    "a",
-    "about",
-    "above",
-    "after",
-    "again",
-    "against",
-    "all",
-    "am",
-    "an",
-    "and",
-    "any",
-    "are",
-    "as",
-    "at",
-    "be",
-    "because",
-    "been",
-    "before",
-    "being",
-    "below",
-    "between",
-    "both",
-    "but",
-    "by",
-    "can",
-    "cannot",
-    "could",
-    "did",
-    "do",
-    "does",
-    "doing",
-    "down",
-    "during",
-    "each",
-    "few",
-    "for",
-    "from",
-    "further",
-    "had",
-    "has",
-    "have",
-    "having",
-    "he",
-    "her",
-    "here",
-    "hers",
-    "herself",
-    "him",
-    "himself",
-    "his",
-    "how",
-    "i",
-    "if",
-    "in",
-    "into",
-    "is",
-    "it",
-    "its",
-    "itself",
-    "me",
-    "more",
-    "most",
-    "my",
-    "myself",
-    "no",
-    "nor",
-    "not",
-    "of",
-    "off",
-    "on",
-    "once",
-    "only",
-    "or",
-    "other",
-    "ought",
-    "our",
-    "ours",
-    "ourselves",
-    "out",
-    "over",
-    "own",
-    "same",
-    "she",
-    "should",
-    "so",
-    "some",
-    "such",
-    "than",
-    "that",
-    "the",
-    "their",
-    "theirs",
-    "them",
-    "themselves",
-    "then",
-    "there",
-    "these",
-    "they",
-    "this",
-    "those",
-    "through",
-    "to",
-    "too",
-    "under",
-    "until",
-    "up",
-    "very",
-    "was",
-    "we",
-    "were",
-    "what",
-    "when",
-    "where",
-    "which",
-    "while",
-    "who",
-    "whom",
-    "why",
-    "with",
-    "would",
-    "you",
-    "your",
-    "yours",
-    "yourself",
-    "yourselves"
-);
+Requirements
 
+Software Development, Programming, Object-Oriented Programming, Java, Python, PHP, JavaScript, MySQL, Database Systems, API Development, Data Structures, Algorithms, Software Testing, Debugging, Documentation, Git, Version Control, Application Development, Software Design, Problem Solving, Teamwork, Communication Skills.
 
+Matching Job Seeker Bio
 
+My name is Anish Thapa. I am a software development candidate with strong knowledge of programming, object-oriented programming, Java, Python, PHP, JavaScript, MySQL, database systems, API development, data structures, and algorithms. I have experience in application development, software testing, debugging, documentation, Git, version control, and software design. I am interested in working as a Software Developer where I can write clean code, develop reliable applications, solve programming problems, and support software deployment and maintenance.
 
+---
+3. Data Analyst
 
-I have done bachelor degree in CSIT Program. I have 6 years of work experience as backend developer and CI CD developer in many local company, I have good understanding of core programming in javaScript and nodejs and and i can code more effeciently. I have good knowledge in Git, Git bash command line. I can automate code javaScript as a screpting language. i am familair with all the core concet of web development include HTML, Css and JS. I am familair with team collaboration. I can test write, test, debuge, Implement, and deploy the code. I am very much familair with CI / CD concept and infrastructure as code (IaC). Some of the other field that I am good at Docker, Kubernetes Practices Git and Version Control Monitoring and Logging Automation Tools
+Employer Description
+
+We are looking for a detail-oriented Data Analyst to support business decision-making through data collection, data cleaning, data analysis, reporting, and visualization. The candidate should be able to work with datasets, prepare reports, identify trends, analyze business performance, and present findings clearly. The ideal candidate should have knowledge of Excel, SQL, Python, statistics, dashboards, data visualization, business intelligence, Power BI, Tableau, data entry, data validation, and report writing. The candidate should have strong analytical thinking, problem-solving, and communication skills.
+
+Requirements
+
+Data Analysis, Data Cleaning, Data Collection, Data Visualization, Excel, SQL, Python, Statistics, Power BI, Tableau, Business Intelligence, Dashboard Creation, Reporting, Report Writing, Data Entry, Data Validation, Trend Analysis, Business Performance Analysis, Analytical Thinking, Problem Solving, Communication Skills, Presentation Skills.
+
+Matching Job Seeker Bio
+
+My name is Sneha Adhikari. I am a detail-oriented Data Analyst with knowledge of data analysis, data cleaning, data collection, data visualization, Excel, SQL, Python, statistics, Power BI, Tableau, and business intelligence. I have experience preparing dashboards, reports, data validation, data entry, trend analysis, and business performance analysis. I am interested in working as a Data Analyst where I can analyze datasets, create reports, present insights, solve business problems, and support decision-making using data.
+
+---
+4. Accountant
+
+Employer Description
+
+We are looking for a responsible Accountant to manage financial records, bookkeeping, accounting entries, invoices, payments, bank reconciliation, tax documentation, payroll support, and financial reporting. The candidate should have knowledge of accounting principles, ledger management, balance sheet, profit and loss statement, accounts payable, accounts receivable, budgeting, auditing, and financial analysis. The ideal candidate should be familiar with Microsoft Excel, accounting software, data entry, record keeping, documentation, and office administration.
+
+Requirements
+
+Accounting, Bookkeeping, Financial Records, Ledger Management, Invoice Management, Payment Processing, Bank Reconciliation, Tax Documentation, Payroll Support, Financial Reporting, Balance Sheet, Profit and Loss Statement, Accounts Payable, Accounts Receivable, Budgeting, Auditing, Financial Analysis, Microsoft Excel, Accounting Software, Data Entry, Record Keeping, Documentation, Time Management, Accuracy, Confidentiality.
+
+Matching Job Seeker Bio
+
+My name is Suman Ghimire. I am a responsible accounting candidate with good knowledge of accounting, bookkeeping, financial records, ledger management, invoice management, payment processing, bank reconciliation, tax documentation, payroll support, and financial reporting. I understand balance sheets, profit and loss statements, accounts payable, accounts receivable, budgeting, auditing, and financial analysis. I am skilled in Microsoft Excel, accounting software, data entry, record keeping, documentation, accuracy, confidentiality, and time management. I am interested in working as an Accountant where I can manage financial records and support business accounting operations.
+
+---
+5. Digital Marketing Officer
+
+Employer Description
+
+We are looking for a creative Digital Marketing Officer to manage online marketing, social media campaigns, content creation, search engine optimization, email marketing, brand promotion, and digital advertising. The candidate should understand marketing strategy, audience engagement, campaign planning, analytics, reporting, and lead generation. The ideal candidate should have knowledge of Facebook Ads, Google Ads, Instagram marketing, SEO, content writing, graphic design basics, keyword research, website traffic analysis, and social media management.
+
+Requirements
+
+Digital Marketing, Online Marketing, Social Media Marketing, Facebook Ads, Google Ads, Instagram Marketing, SEO, Search Engine Optimization, Email Marketing, Content Creation, Content Writing, Keyword Research, Brand Promotion, Campaign Planning, Lead Generation, Audience Engagement, Marketing Analytics, Website Traffic Analysis, Reporting, Canva, Graphic Design Basics, Communication Skills, Creativity.
+
+Matching Job Seeker Bio
+
+My name is Kritika Bhandari. I am a creative Digital Marketing candidate with knowledge of digital marketing, online marketing, social media marketing, Facebook Ads, Google Ads, Instagram marketing, SEO, search engine optimization, email marketing, content creation, content writing, keyword research, and brand promotion. I have experience in campaign planning, lead generation, audience engagement, marketing analytics, website traffic analysis, reporting, Canva, and graphic design basics. I am interested in working as a Digital Marketing Officer where I can manage social media campaigns, improve online visibility, create marketing content, and support business growth.
+
+---
+6. Network Administrator
+
+Employer Description
+
+We are looking for a Network Administrator to manage computer networks, network security, system monitoring, troubleshooting, server support, router configuration, switch configuration, firewall management, and user support. The candidate should have knowledge of LAN, WAN, TCP/IP, DNS, DHCP, VPN, network devices, network maintenance, backup, and security policies. The ideal candidate should be able to diagnose network problems, maintain network performance, support hardware and software issues, and document technical activities.
+
+Requirements
+
+Network Administration, Computer Networks, Network Security, LAN, WAN, TCP/IP, DNS, DHCP, VPN, Router Configuration, Switch Configuration, Firewall Management, Server Support, System Monitoring, Troubleshooting, Hardware Support, Software Support, Network Maintenance, Backup, Security Policies, User Support, Technical Documentation, Problem Solving, Communication Skills.
+
+Matching Job Seeker Bio
+
+My name is Bibek Shrestha. I am a Network Administrator candidate with knowledge of network administration, computer networks, network security, LAN, WAN, TCP/IP, DNS, DHCP, VPN, router configuration, switch configuration, and firewall management. I have experience in server support, system monitoring, troubleshooting, hardware support, software support, network maintenance, backup, user support, security policies, and technical documentation. I am interested in working as a Network Administrator where I can maintain network performance, solve technical issues, and support secure IT operations.
+
+---
+7. Customer Service Representative
+
+Employer Description
+
+We are looking for a friendly and professional Customer Service Representative to support customers through phone, email, chat, and front desk communication. The candidate should be able to answer customer questions, handle complaints, provide product or service information, maintain customer records, and support daily office communication. The ideal candidate should have strong communication skills, problem-solving ability, patience, teamwork, data entry skills, email communication, customer relationship management, and professional behavior.
+
+Requirements
+
+Customer Service, Customer Support, Communication Skills, Phone Support, Email Support, Chat Support, Front Desk Support, Complaint Handling, Customer Relationship Management, Data Entry, Record Keeping, Office Communication, Problem Solving, Patience, Teamwork, Time Management, Professional Behavior, Microsoft Office, Documentation, Service Information, Customer Satisfaction.
+
+Matching Job Seeker Bio
+
+My name is Alisha Tamang. I am a friendly and professional Customer Service candidate with strong knowledge of customer service, customer support, communication skills, phone support, email support, chat support, and front desk support. I have experience in complaint handling, customer relationship management, data entry, record keeping, office communication, documentation, and customer satisfaction. I am patient, responsible, organized, and interested in working as a Customer Service Representative where I can help customers, solve problems, and support daily office communication.
+
+---
+8. Project Coordinator
+
+Employer Description
+
+We are looking for a Project Coordinator to support project planning, team coordination, documentation, scheduling, reporting, communication, and task tracking. The candidate should help manage project activities, coordinate with different departments, monitor deadlines, prepare progress reports, organize meetings, and support project delivery. The ideal candidate should have knowledge of project management, time management, Microsoft Office, Excel, documentation, communication, team collaboration, problem-solving, and administrative support.
+
+Requirements
+
+Project Coordination, Project Management, Team Coordination, Task Tracking, Scheduling, Documentation, Reporting, Progress Reports, Meeting Coordination, Department Coordination, Deadline Management, Time Management, Microsoft Office, Excel, Word, Email Communication, Administrative Support, Communication Skills, Problem Solving, Team Collaboration, Organization Skills.
+
+Matching Job Seeker Bio
+
+My name is Nisha Rai. I am an organized Project Coordinator candidate with knowledge of project coordination, project management, team coordination, task tracking, scheduling, documentation, reporting, progress reports, meeting coordination, and department coordination. I have experience with deadline management, time management, Microsoft Office, Excel, Word, email communication, administrative support, communication skills, problem-solving, and team collaboration. I am interested in working as a Project Coordinator where I can support project planning, coordinate teams, track tasks, and help complete projects on time.
+
+---
+9. UI/UX Designer
+
+Employer Description
+
+We are looking for a creative UI/UX Designer to design user-friendly websites, mobile app interfaces, wireframes, prototypes, and visual layouts. The candidate should understand user experience design, user interface design, usability, responsive design, color theory, typography, user research, and design systems. The ideal candidate should have knowledge of Figma, Adobe XD, Canva, HTML, CSS, wireframing, prototyping, interaction design, and collaboration with developers.
+
+Requirements
+
+UI Design, UX Design, UI/UX Designer, User Interface Design, User Experience Design, Figma, Adobe XD, Canva, Wireframing, Prototyping, Responsive Design, Visual Design, Color Theory, Typography, User Research, Usability Testing, Design System, Interaction Design, HTML, CSS, Developer Collaboration, Creativity, Communication Skills.
+
+Matching Job Seeker Bio
+
+My name is Rojina Maharjan. I am a creative UI/UX Designer with knowledge of UI design, UX design, user interface design, user experience design, Figma, Adobe XD, Canva, wireframing, prototyping, responsive design, visual design, color theory, typography, and user research. I have experience in usability testing, design systems, interaction design, HTML, CSS, and developer collaboration. I am interested in working as a UI/UX Designer where I can create user-friendly interfaces, improve user experience, design prototypes, and support web and mobile application projects.
+
+---
+10. Office Assistant
+
+Employer Description
+
+We are looking for a responsible Office Assistant to support daily administrative tasks, office management, documentation, filing, data entry, email communication, phone handling, staff coordination, and record keeping. The candidate should be organized, punctual, professional, and able to support different departments. The ideal candidate should have knowledge of Microsoft Word, Microsoft Excel, office documentation, scheduling, inventory support, customer handling, and administrative communication.
+
+Requirements
+
+Office Assistant, Administrative Support, Office Management, Documentation, Filing, Data Entry, Record Keeping, Email Communication, Phone Handling, Staff Coordination, Department Coordination, Microsoft Word, Microsoft Excel, Scheduling, Inventory Support, Customer Handling, Time Management, Organization Skills, Communication Skills, Professional Behavior, Teamwork.
+
+Matching Job Seeker Bio
+
+My name is Pooja Lama. I am a responsible Office Assistant candidate with knowledge of administrative support, office management, documentation, filing, data entry, record keeping, email communication, phone handling, staff coordination, and department coordination. I am skilled in Microsoft Word, Microsoft Excel, scheduling, inventory support, customer handling, time management, organization skills, communication skills, teamwork, and professional behavior. I am interested in working as an Office Assistant where I can support daily office operations and help different departments work smoothly.
