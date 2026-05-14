@@ -1,249 +1,581 @@
 <?php
 session_start();
-if(!isset( $_SESSION['name']))
-{
-	header('location:registration.php');
+if (!isset($_SESSION['name'])) {
+  header('location:registration.php');
 }
 ?>
+
 <!doctype html>
 <html lang="en">
-  <head>
-    <meta charset="utf-8">
-    <meta name="viewport" content="width=device-width, initial-scale=1, shrink-to-fit=no">
-    <meta name="description" content="">
-    <meta name="author" content="">
-    <link rel="icon" href="/docs/4.0/assets/img/favicons/favicon.ico">
 
-    <title>Employer Dashboard</title>
-    <link rel="stylesheet" href="https://maxcdn.bootstrapcdn.com/bootstrap/4.5.2/css/bootstrap.min.css">
+<head>
+  <meta charset="utf-8">
+  <meta name="viewport" content="width=device-width, initial-scale=1">
+  <title>Employer | View Biodata</title>
 
-<!-- jQuery library -->
-    <script src="https://ajax.googleapis.com/ajax/libs/jquery/3.5.1/jquery.min.js"></script>
+  <link rel="stylesheet" href="https://maxcdn.bootstrapcdn.com/bootstrap/4.5.2/css/bootstrap.min.css">
+  <script src="https://ajax.googleapis.com/ajax/libs/jquery/3.5.1/jquery.min.js"></script>
+  <script src="https://cdnjs.cloudflare.com/ajax/libs/popper.js/1.16.0/umd/popper.min.js"></script>
+  <script src="https://maxcdn.bootstrapcdn.com/bootstrap/4.5.2/js/bootstrap.min.js"></script>
+  <link href="./css/dashboard.css" rel="stylesheet">
 
-<!-- Popper JS -->
-    <script src="https://cdnjs.cloudflare.com/ajax/libs/popper.js/1.16.0/umd/popper.min.js"></script>
+  <style>
+    body {
+      margin: 0;
+      background: #f4f8ff;
+      font-family: "Segoe UI", Arial, sans-serif;
+      color: #1f2937;
+    }
 
-<!-- Latest compiled JavaScript -->
-    <script src="https://maxcdn.bootstrapcdn.com/bootstrap/4.5.2/js/bootstrap.min.js"></script>
+    .navbar {
+      height: 70px;
+      background: #ffffff !important;
+      box-shadow: 0 4px 20px rgba(80, 143, 233, 0.14);
+      padding: 0 !important;
+      z-index: 1000;
+    }
 
-    <!-- Custom styles for this template -->
-    <link href="./css/dashboard.css" rel="stylesheet">
-  </head>
+    .navbar-brand {
+      width: 260px;
+      height: 70px;
+      background: linear-gradient(135deg, rgb(80, 143, 233), #4f7fe5);
+      color: #ffffff !important;
+      display: flex;
+      align-items: center;
+      padding-left: 25px !important;
+      font-size: 21px;
+      font-weight: 800;
+      letter-spacing: 0.5px;
+      margin: 0 !important;
+    }
 
-  <body>
-    <nav class="navbar navbar-dark sticky-top bg-dark flex-md-nowrap p-0">
-      <a class="navbar-brand col-sm-3 col-md-2 mr-0" href="#">Employer Page</a>
-      <ul class="navbar-nav px-3">
-        <li class="nav-item text-nowrap">
-          <a class="nav-link" href="logout.php">Sign out</a>
-        </li>
-      </ul>
+    .navbar .nav-link {
+      color: rgb(80, 143, 233) !important;
+      border: 1px solid rgb(80, 143, 233);
+      border-radius: 12px;
+      padding: 8px 18px !important;
+      font-weight: 700;
+      margin-right: 20px;
+      transition: 0.25s;
+    }
+
+    .navbar .nav-link:hover {
+      background: rgb(80, 143, 233);
+      color: #ffffff !important;
+    }
+
+    .sidebar {
+      width: 260px;
+      min-height: calc(100vh - 70px);
+      background: #10223f !important;
+      padding: 25px 15px;
+      position: fixed;
+      left: 0;
+      top: 70px;
+    }
+
+    .sidebar .nav-link {
+      color: #dbeafe !important;
+      border-radius: 14px;
+      padding: 13px 15px;
+      margin-bottom: 8px;
+      font-weight: 500;
+      display: flex;
+      align-items: center;
+      gap: 12px;
+      transition: 0.25s;
+    }
+
+    .sidebar .nav-link:hover,
+    .sidebar .nav-link.active {
+      background: linear-gradient(135deg, rgb(80, 143, 233), #4f7fe5);
+      color: #ffffff !important;
+      transform: translateX(5px);
+      box-shadow: 0 10px 24px rgba(80, 143, 233, 0.28);
+    }
+
+    .sidebar .nav-link svg {
+      width: 19px;
+      height: 19px;
+    }
+
+    main {
+      margin-left: 260px;
+      padding: 35px !important;
+      max-width: calc(100% - 260px);
+    }
+
+    .page-header {
+      background: linear-gradient(135deg, rgb(80, 143, 233), #4f7fe5);
+      color: white;
+      border-radius: 28px;
+      padding: 35px;
+      margin-bottom: 28px;
+      box-shadow: 0 18px 45px rgba(80, 143, 233, 0.28);
+    }
+
+    .page-header h1 {
+      font-size: 34px;
+      font-weight: 800;
+      margin-bottom: 8px;
+      text-transform: uppercase;
+    }
+
+    .page-header p {
+      margin: 0;
+      opacity: 0.95;
+      font-size: 16px;
+    }
+
+    .content-card {
+      background: #ffffff;
+      border-radius: 24px;
+      padding: 30px;
+      box-shadow: 0 12px 35px rgba(80, 143, 233, 0.12);
+      border: 1px solid #dbeafe;
+      margin-bottom: 28px;
+    }
+
+    .section-title {
+      font-size: 22px;
+      font-weight: 800;
+      color: #1f2937;
+      margin-bottom: 22px;
+      display: flex;
+      align-items: center;
+      gap: 10px;
+    }
+
+    .section-title span {
+      width: 12px;
+      height: 32px;
+      background: rgb(80, 143, 233);
+      border-radius: 20px;
+      display: inline-block;
+    }
+
+    .profile-top {
+      display: flex;
+      align-items: center;
+      gap: 18px;
+      margin-bottom: 24px;
+      padding-bottom: 22px;
+      border-bottom: 1px solid #dbeafe;
+    }
+
+    .profile-avatar {
+      width: 74px;
+      height: 74px;
+      border-radius: 22px;
+      background: linear-gradient(135deg, rgb(80, 143, 233), #4f7fe5);
+      color: white;
+      display: flex;
+      align-items: center;
+      justify-content: center;
+      font-size: 31px;
+      font-weight: 800;
+      box-shadow: 0 12px 28px rgba(80, 143, 233, 0.26);
+    }
+
+    .profile-top h4 {
+      margin: 0;
+      font-weight: 800;
+      color: #1f2937;
+    }
+
+    .profile-top span {
+      color: rgb(80, 143, 233);
+      font-weight: 600;
+    }
+
+    .table {
+      margin-bottom: 0;
+    }
+
+    .info-table td {
+      border: none;
+      border-bottom: 1px solid #edf3ff;
+      padding: 16px 18px;
+      color: #374151;
+      vertical-align: middle;
+      font-weight: 500;
+    }
+
+    .info-table tr:last-child td {
+      border-bottom: none;
+    }
+
+    .info-table td:first-child {
+      width: 230px;
+      background: #f4f8ff;
+      font-weight: 800;
+      color: #1f2937;
+    }
+
+    .edu-table thead th {
+      background: #10223f;
+      color: #ffffff;
+      border: none;
+      padding: 15px;
+      font-weight: 800;
+      vertical-align: middle;
+    }
+
+    .edu-table tbody td {
+      padding: 15px;
+      vertical-align: middle;
+      border-color: #edf3ff;
+      color: #374151;
+      font-weight: 500;
+    }
+
+    .edu-table tbody tr:hover {
+      background: #f4f8ff;
+    }
+
+    .resume-btn,
+    .back-btn {
+      background: #e8f1ff;
+      color: rgb(80, 143, 233) !important;
+      border-radius: 12px;
+      padding: 9px 16px;
+      text-decoration: none !important;
+      font-weight: 800;
+      display: inline-block;
+      transition: 0.25s;
+    }
+
+    .resume-btn:hover,
+    .back-btn:hover {
+      background: rgb(80, 143, 233);
+      color: #ffffff !important;
+      transform: translateY(-2px);
+    }
+
+    textarea {
+      width: 100%;
+      min-height: 130px;
+      border-radius: 16px;
+      border: 1px solid #dbeafe;
+      background: #f8fbff;
+      color: #1f2937;
+      font-weight: 500;
+      padding: 15px;
+      resize: vertical;
+      outline: none;
+      transition: 0.25s;
+    }
+
+    textarea:focus {
+      border-color: rgb(80, 143, 233);
+      box-shadow: 0 0 0 4px rgba(80, 143, 233, 0.14);
+      background: #ffffff;
+    }
+
+    .submit-btn,
+    input[type="submit"] {
+      background: linear-gradient(135deg, rgb(80, 143, 233), #4f7fe5);
+      border: none;
+      color: white;
+      border-radius: 14px;
+      padding: 12px 34px;
+      font-weight: 800;
+      box-shadow: 0 12px 25px rgba(80, 143, 233, 0.28);
+      transition: 0.25s;
+      cursor: pointer;
+    }
+
+    .submit-btn:hover,
+    input[type="submit"]:hover {
+      transform: translateY(-3px);
+      box-shadow: 0 16px 35px rgba(80, 143, 233, 0.38);
+      color: white;
+    }
+
+    .textareaRequiredMsg {
+      display: none;
+      font-size: 13px;
+      color: #dc3545;
+      margin-top: 5px;
+    }
+
+    .action-area {
+      text-align: center;
+      margin-top: 25px;
+    }
+
+    @media (max-width: 768px) {
+      .navbar {
+        height: auto;
+        flex-direction: column;
+        align-items: stretch;
+      }
+
+      .navbar-brand {
+        width: 100%;
+      }
+
+      .navbar .nav-link {
+        margin: 12px;
+        text-align: center;
+      }
+
+      .sidebar {
+        position: static;
+        width: 100%;
+        min-height: auto;
+      }
+
+      main {
+        margin-left: 0;
+        max-width: 100%;
+        padding: 20px !important;
+      }
+
+      .page-header h1 {
+        font-size: 26px;
+      }
+
+      .content-card {
+        padding: 22px;
+      }
+
+      .profile-top {
+        flex-direction: column;
+        text-align: center;
+      }
+
+      .info-table td:first-child {
+        width: 150px;
+      }
+    }
+  </style>
+</head>
+
+<body>
+
+<nav class="navbar navbar-dark sticky-top bg-dark flex-md-nowrap p-0">
+  <a class="navbar-brand col-sm-3 col-md-2 mr-0" href="#">Employer Page</a>
+  <ul class="navbar-nav px-3">
+    <li class="nav-item text-nowrap">
+      <a class="nav-link" href="logout.php">Sign out</a>
+    </li>
+  </ul>
+</nav>
+
+<div class="container-fluid">
+  <div class="row">
+
+    <nav class="col-md-2 d-none d-md-block bg-light sidebar">
+      <div class="sidebar-sticky">
+        <ul class="nav flex-column">
+
+          <li class="nav-item">
+            <a class="nav-link" href="index.php">
+              <span data-feather="home"></span>
+              Dashboard
+            </a>
+          </li>
+
+          <li class="nav-item">
+            <a class="nav-link" href="profile.php">
+              <span data-feather="user"></span>
+              Profile
+            </a>
+          </li>
+
+          <li class="nav-item">
+            <a class="nav-link" href="managejob.php">
+              <span data-feather="briefcase"></span>
+              Manage Job
+            </a>
+          </li>
+
+          <li class="nav-item">
+            <a class="nav-link" href="walking.php">
+              <span data-feather="file-text"></span>
+              Walking Interview
+            </a>
+          </li>
+
+          <li class="nav-item">
+            <a class="nav-link active" href="application.php">
+              <span data-feather="file-plus"></span>
+              Application
+            </a>
+          </li>
+
+        </ul>
+      </div>
     </nav>
 
-    <div class="container-fluid">
-      <div class="row">
-        <nav class="col-md-2 d-none d-md-block bg-light sidebar">
-          <div class="sidebar-sticky">
-            <ul class="nav flex-column">
-            <li class="nav-item">
-                <a class="nav-link active" href="index.php">
-                  <span data-feather="home"></span>
-                  Dashboard <span class="sr-only">(current)</span>
-                </a>
-              </li>
-              <li class="nav-item">
-                <a class="nav-link" href="profile.php">
-                  <span data-feather="users"></span>
-                  Profile
-                </a>
-              </li>
-              <li class="nav-item">
-                <a class="nav-link" href="managejob.php">
-                  <span data-feather="users"></span>
-                  Manage Job
-                </a>
-              </li>
-            <h6 class="sidebar-heading d-flex justify-content-between align-items-center px-3 mt-4 mb-1 text-muted">
-              <span>Saved reports</span>
-              <a class="d-flex align-items-center text-muted" href="#">
-                <span data-feather="plus-circle"></span>
-              </a>
-            </h6>
-            <ul class="nav flex-column mb-2">
-              <li class="nav-item">
-                <a class="nav-link" href="walking.php">
-                  <span data-feather="file-text"></span>
-                 Walking Interview
-                </a>
-              </li>
-              <li class="nav-item">
-                <a class="nav-link" href="application.php">
-                  <span data-feather="file-plus"></span>
-                  Application
-                </a>
-              </li>
-            </ul>
-          </div>
-        </nav>
+    <main role="main" class="col-md-9 ml-sm-auto col-lg-10 pt-3 px-4">
 
-        <main role="main" class="col-md-9 ml-sm-auto col-lg-10 pt-3 px-4">
-          <div class="d-flex justify-content-between flex-wrap flex-md-nowrap align-items-center pb-2 mb-3 border-bottom">
-            <h1 class="h2" style="text-transform:uppercase;">View Biodata</h1>
-          </div>
-                      
-
-          <table width="100%" border="0" cellspacing="0" cellpadding="0">
-                  <tr>
-                    <td bgcolor="#006699" style="color:#fff"><strong>Personal Information</strong></td>
-                  </tr>
-                  <tr>
-                    <td>
-                    <?php
-                    $ID=$_GET['JobSeekId'];
-                    // Establish Connection with Database
-                   include 'connection/db.php';
-
-                $sql = "select * from jobSeeker_reg where JobSeekId='".$ID."'  ";
-
-                $result = mysqli_query($conn,$sql);
-
-                    $row = mysqli_fetch_array($result)
-                    ?>
-                <table width="100%" border="1" cellspacing="2" cellpadding="2">
-                  <tr>
-                    <td><strong>Name:</strong></td>
-                    <td><?php echo $row['JobSeekerName'];?></td>
-                  </tr>
-                  <tr>
-                    <td><strong>Address:</strong></td>
-                    <td><?php echo $row['Address'];?></td>
-                  </tr>
-                  <tr>
-                    <td><strong>City:</strong></td>
-                    <td><?php echo $row['City'];?></td>
-                  </tr>
-                  <tr>
-                    <td><strong>Email:</strong></td>
-                    <td><?php echo $row['Email'];?></td>
-                  </tr>
-                  <tr>
-                    <td><strong>Mobile:</strong></td>
-                    <td><?php echo $row['Mobile'];?></td>
-                  </tr>
-                  <tr>
-                    <td><strong>Highest Qualification:</strong></td>
-                    <td><?php echo $row['Qualification'];?></td>
-                  </tr>
-                  <tr>
-                    <td><strong>Gender:</strong></td>
-                    <td><?php echo $row['Gender'];?></td>
-                  </tr>
-                  <tr>
-                    <td><strong>Birth Date:</strong></td>
-                    <td><?php echo $row['BirthDate'];?></td>
-                  </tr>
-                  <tr>
-                    <td><strong>Resume:</strong></td>
-                    <td><a href="../job seeker/upload/<?php echo $row['Resume'];?>" target="_blank"><strong>View</strong></a></td>
-                  </tr>
-                  <tr>
-                    <td>&nbsp;</td>
-                    <td>&nbsp;</td>
-                  </tr>
-                </table>
-                    </td>
-                  </tr>
-                  <tr>
-                    <td bgcolor="#006699"style="color:#fff"><strong>Educational Qualification</strong></td>
-                  </tr>
-                  <tr>
-                    <td><table width="100%" border="1" cellpadding="1" cellspacing="2" bordercolor="#006699" >
-                      <tr style="color:#fff">
-                        <th height="32" bgcolor="#006699" ><div align="left" ><strong>Degree</strong></div></th>
-                        <th bgcolor="#006699" ><div align="left" ><strong>University</strong></div></th>
-                        <th bgcolor="#006699" ><div align="left" ><strong>Passing Year</strong></div></th>
-                        <th bgcolor="#006699" ><div align="left" ><strong>Percentage</strong></div></th>
-                      </tr>
-                      <?php
-					  $ID=$_GET['JobSeekId'];
-                    include 'connection/db.php';
-                    $sql = "select * from JobSeeker_Education where JobSeekId='".$ID."'";
-                    // Execute query
-                    $result = mysqli_query($conn,$sql);
-                        // Loop through each records 
-                    while($row = mysqli_fetch_array($result))
-                        {
-                            $Degree=$row['Degree'];
-                            $Univ=$row['University'];
-                            $Passing=$row['PassingYear'];
-                        $Per=$row['Percentage'];
-                        ?>
-                      <tr>
-                        <td class="style3"><div align="left" class="style9 style5"><strong><?php echo $Degree;?></strong></div></td>
-                        <td class="style3"><div align="left" class="style9 style5"><strong><?php echo $Univ;?></strong></div></td>
-                        <td class="style3"><div align="left" class="style9 style5"><strong><?php echo $Passing;?></strong></div></td>
-                        <td class="style3"><div align="left" class="style9 style5"><strong><?php echo $Per;?></strong></div></td>
-                      </tr>
-                      <?php
-                        }
-
-                        $records = mysqli_num_rows($result);
-                            ?>
-                      
-                      <?php
-                    // Close the connection
-                    mysqli_close($conn);
-                    ?>
-                    </table></td>
-                  </tr>
-                </table>
-                <?php
-				$Status=$_GET['Status'];
-				if($Status=="Apply")
-				{
-				?>
-                <form id="form1" method="post" action="CallLatter.php?JobId=<?php echo $_GET['JobId'] ;?>&JobSeekId=<?php echo $_GET['JobSeekId'] ;?>&AppId=<?php echo $_GET['AppId'] ;?>">
-                  <table width="100%" border="0" cellspacing="0" cellpadding="0" style="margin-top:10px">
-                    <tr>
-                      <td><strong>Call Latter Description:</strong></td>
-                        <td><span id="sprytextarea1">
-                        <label>
-                        <textarea name="txtDesc" id="txtDesc" cols="35" rows="3"></textarea>
-                        </label>
-                      <span class="textareaRequiredMsg">A value is required.</span></span></td>
-                      <td>&nbsp;</td>
-                    </tr>
-                    <tr>
-                      <td>&nbsp;</td>
-                      <td><label>
-                        <input type="submit" name="button" id="button" value="Submit" />
-                      </label></td>
-                      <td>&nbsp;</td>
-                    </tr>
-                  </table>
-              </form>
-              <?php
-			  }
-			  ?>
-                <p align="center"><a href="application.php"><strong>Back</strong></a></p>
-       
-        </main>
+      <div class="page-header">
+        <h1>View Biodata</h1>
+        <p>Review job seeker personal information, education details, and resume.</p>
       </div>
-    </div>
 
-    <!-- Bootstrap core JavaScript
-    ================================================== -->
-    <!-- Placed at the end of the document so the pages load faster -->
-    <script src="https://code.jquery.com/jquery-3.2.1.slim.min.js" integrity="sha384-KJ3o2DKtIkvYIK3UENzmM7KCkRr/rE9/Qpg6aAZGJwFDMVNA/GpGFF93hXpG5KkN" crossorigin="anonymous"></script>
-    <script>window.jQuery || document.write('<script src="../../assets/js/vendor/jquery-slim.min.js"><\/script>');</script>
-    <script src="../../assets/js/vendor/popper.min.js"></script>
-    <script src="../../dist/js/bootstrap.min.js"></script>
+      <?php
+      $ID = $_GET['JobSeekId'];
+      include 'connection/db.php';
 
-    <!-- Icons -->
-    <script src="https://unpkg.com/feather-icons/dist/feather.min.js"></script>
-    <script>
-      feather.replace();
-    </script>
+      $sql = "select * from jobSeeker_reg where JobSeekId='" . $ID . "'  ";
+      $result = mysqli_query($conn, $sql);
+      $row = mysqli_fetch_array($result);
+      ?>
 
-  </body>
+      <div class="content-card">
+        <h3 class="section-title"><span></span>Personal Information</h3>
+
+        <div class="profile-top">
+          <div class="profile-avatar">
+            <?php echo strtoupper(substr($row['JobSeekerName'], 0, 1)); ?>
+          </div>
+          <div>
+            <h4><?php echo $row['JobSeekerName']; ?></h4>
+            <span><?php echo $row['Email']; ?></span>
+          </div>
+        </div>
+
+        <div class="table-responsive">
+          <table class="table info-table">
+            <tbody>
+              <tr>
+                <td>Name</td>
+                <td><?php echo $row['JobSeekerName']; ?></td>
+              </tr>
+
+              <tr>
+                <td>Address</td>
+                <td><?php echo $row['Address']; ?></td>
+              </tr>
+
+              <tr>
+                <td>City</td>
+                <td><?php echo $row['City']; ?></td>
+              </tr>
+
+              <tr>
+                <td>Email</td>
+                <td><?php echo $row['Email']; ?></td>
+              </tr>
+
+              <tr>
+                <td>Mobile</td>
+                <td><?php echo $row['Mobile']; ?></td>
+              </tr>
+
+              <tr>
+                <td>Highest Qualification</td>
+                <td><?php echo $row['Qualification']; ?></td>
+              </tr>
+
+              <tr>
+                <td>Gender</td>
+                <td><?php echo $row['Gender']; ?></td>
+              </tr>
+
+              <tr>
+                <td>Birth Date</td>
+                <td><?php echo $row['BirthDate']; ?></td>
+              </tr>
+
+              <tr>
+                <td>Resume</td>
+                <td>
+                  <a href="../job seeker/upload/<?php echo $row['Resume']; ?>" target="_blank" class="resume-btn">
+                    View Resume
+                  </a>
+                </td>
+              </tr>
+            </tbody>
+          </table>
+        </div>
+      </div>
+
+      <div class="content-card">
+        <h3 class="section-title"><span></span>Educational Qualification</h3>
+
+        <div class="table-responsive">
+          <table class="table table-striped edu-table">
+            <thead>
+              <tr>
+                <th>Degree</th>
+                <th>University</th>
+                <th>Passing Year</th>
+                <th>Percentage</th>
+              </tr>
+            </thead>
+
+            <tbody>
+              <?php
+              $ID = $_GET['JobSeekId'];
+              include 'connection/db.php';
+
+              $sql = "select * from JobSeeker_Education where JobSeekId='" . $ID . "'";
+              $result = mysqli_query($conn, $sql);
+
+              while ($row = mysqli_fetch_array($result)) {
+                $Degree = $row['Degree'];
+                $Univ = $row['University'];
+                $Passing = $row['PassingYear'];
+                $Per = $row['Percentage'];
+              ?>
+                <tr>
+                  <td><strong><?php echo $Degree; ?></strong></td>
+                  <td><?php echo $Univ; ?></td>
+                  <td><?php echo $Passing; ?></td>
+                  <td><?php echo $Per; ?></td>
+                </tr>
+              <?php
+              }
+
+              mysqli_close($conn);
+              ?>
+            </tbody>
+          </table>
+        </div>
+      </div>
+
+      <?php
+      $Status = $_GET['Status'];
+      if ($Status == "Apply") {
+      ?>
+        <div class="content-card">
+          <h3 class="section-title"><span></span>Send Call Letter</h3>
+
+          <form id="form1" method="post" action="CallLatter.php?JobId=<?php echo $_GET['JobId']; ?>&JobSeekId=<?php echo $_GET['JobSeekId']; ?>&AppId=<?php echo $_GET['AppId']; ?>">
+            <div class="form-group">
+              <label for="txtDesc"><strong>Call Letter Description</strong></label>
+              <span id="sprytextarea1">
+                <textarea name="txtDesc" id="txtDesc" required></textarea>
+                <span class="textareaRequiredMsg">A value is required.</span>
+              </span>
+            </div>
+
+            <div class="text-center mt-3">
+              <input type="submit" name="button" id="button" value="Submit">
+            </div>
+          </form>
+        </div>
+      <?php
+      }
+      ?>
+
+      <div class="action-area">
+        <a href="application.php" class="back-btn">Back</a>
+      </div>
+
+    </main>
+  </div>
+</div>
+
+<script src="https://code.jquery.com/jquery-3.2.1.slim.min.js"></script>
+<script src="https://unpkg.com/feather-icons/dist/feather.min.js"></script>
+<script>
+  feather.replace();
+</script>
+
+</body>
 </html>
