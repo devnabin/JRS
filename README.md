@@ -206,7 +206,7 @@ Create a database named:
 job_recommend
 ```
 
-Then import the project database SQL file into this database.
+Then import the project database SQL file into this database which is located on database folder in named "job_recommend.sql"
 
 ---
 
